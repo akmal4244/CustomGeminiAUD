@@ -289,10 +289,6 @@
       box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
     }
 
-    .keyboard-hint {
-      color: var(--soft);
-    }
-
     .deck {
       position: relative;
       height: calc(100svh - var(--topbar-h) - var(--controls-h));
@@ -1096,10 +1092,6 @@
         --controls-h: 72px;
       }
 
-      .keyboard-hint {
-        display: none;
-      }
-
       .deck-topbar {
         grid-template-columns: auto minmax(0, 1fr) auto;
       }
@@ -1444,7 +1436,6 @@
       </div>
       <nav class="slide-dots" id="slideDots" aria-label="Navigasi slide"></nav>
       <div class="top-actions">
-        <span class="keyboard-hint">Anak panah, Space, Home, End</span>
         <span class="counter" id="slideCounter">1 / 11</span>
         <button class="fullscreen-btn" id="fullscreenBtn" type="button" aria-label="Masuk skrin penuh" aria-pressed="false" title="Masuk skrin penuh">
           <svg class="icon-expand" viewBox="0 0 24 24" aria-hidden="true">
