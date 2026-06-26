@@ -430,6 +430,7 @@
     .hero-support {
       display: flex;
       align-items: flex-end;
+      flex-wrap: wrap;
       gap: 16px;
       margin-top: 22px;
     }
@@ -437,6 +438,31 @@
     .hero-support .pill-row {
       margin-top: 0;
       flex: 1 1 auto;
+    }
+
+    .hero-topic-row {
+      width: 100%;
+      max-width: 100%;
+      flex: 0 0 100%;
+      flex-wrap: nowrap;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .hero-topic-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hero-topic-row .pill {
+      min-height: 30px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+    }
+
+    .hero-support .qr-badge {
+      margin-left: auto;
     }
 
     .panel {
@@ -1335,6 +1361,10 @@
         flex: 1 1 auto;
       }
 
+      .hero-topic-row {
+        flex: 0 1 auto;
+      }
+
       .pill-row {
         gap: 8px;
         margin-top: 16px;
@@ -1466,10 +1496,11 @@
             <p class="presenter-line">Mohamad Nurakmal bin Ab Rasid | Analisis laporan audit</p>
             <p class="subtitle">Aliran kerja ringkas untuk universiti awam dan institusi di bawah Kementerian Pendidikan Tinggi, daripada dokumen pengauditan kepada output analisis yang seragam, boleh disemak dan sedia dimasukkan ke templat slaid.</p>
             <div class="hero-support">
-              <div class="pill-row" aria-label="Topik utama">
+              <div class="pill-row hero-topic-row" aria-label="Topik utama">
                 <span class="pill">Custom Gemini</span>
                 <span class="pill">Laporan Pengauditan</span>
                 <span class="pill">Prompt Standard</span>
+                <span class="pill">Output Analisis</span>
               </div>
               <div class="qr-badge" aria-label="QR untuk imbas bahan pembentangan">
                 <img src="assets/slide-gems-qr.png" alt="QR untuk imbas bahan pembentangan">
