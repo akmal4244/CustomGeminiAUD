@@ -466,6 +466,40 @@
       animation: geminiTwinkle 2.8s ease-in-out infinite;
     }
 
+    .qr-badge {
+      position: absolute;
+      top: clamp(18px, 2.4vw, 28px);
+      right: clamp(18px, 2.4vw, 28px);
+      z-index: 4;
+      width: clamp(124px, 11vw, 162px);
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.13);
+      backdrop-filter: blur(12px);
+    }
+
+    .qr-badge img {
+      width: 100%;
+      aspect-ratio: 1;
+      display: block;
+      border-radius: 6px;
+      object-fit: contain;
+      background: #ffffff;
+      image-rendering: pixelated;
+    }
+
+    .qr-badge span {
+      color: #174569;
+      font-size: 0.72rem;
+      line-height: 1.15;
+      font-weight: 900;
+      text-align: center;
+    }
+
     .portrait-stage {
       position: relative;
       min-height: 0;
@@ -1089,6 +1123,18 @@
         height: 20px;
       }
 
+      .qr-badge {
+        top: 12px;
+        right: 12px;
+        width: 92px;
+        gap: 5px;
+        padding: 7px;
+      }
+
+      .qr-badge span {
+        font-size: 0.58rem;
+      }
+
       .portrait-photo {
         width: min(58%, 190px);
       }
@@ -1338,6 +1384,10 @@
                   <path fill="url(#geminiGradient)" d="M12 2.2c1.55 4.85 4.1 7.4 9.2 9.8-5.1 2.4-7.65 4.95-9.2 9.8-1.55-4.85-4.1-7.4-9.2-9.8 5.1-2.4 7.65-4.95 9.2-9.8Z"></path>
                 </svg>
                 <span>Gemini</span>
+              </div>
+              <div class="qr-badge" aria-label="QR untuk imbas bahan pembentangan">
+                <img src="assets/slide-gems-qr.png" alt="QR untuk imbas bahan pembentangan">
+                <span>Imbas QR</span>
               </div>
               <div class="portrait-stage">
                 <span class="portrait-orbit" aria-hidden="true"></span>
