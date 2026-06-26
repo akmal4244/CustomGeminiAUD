@@ -5,24 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tatacara Nak Gunakan Chatbot Custom Gems</title>
   <meta name="description" content="Panduan penggunaan Custom Gemini untuk analisis dokumen pengauditan universiti awam.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffffff'/%3E%3Cpath d='M16 44h32M20 26h24M24 18h16M30 18v26M18 44 14 52h36l-4-8' stroke='%230ea5e9' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='48' cy='18' r='6' fill='%23c88719'/%3E%3C/svg%3E">
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #07111f;
-      --bg-2: #0b1f3d;
-      --panel: rgba(12, 30, 58, 0.78);
-      --panel-strong: rgba(14, 40, 78, 0.92);
-      --line: rgba(148, 196, 255, 0.22);
-      --line-strong: rgba(115, 205, 255, 0.46);
-      --text: #f5f9ff;
-      --muted: #b7c8dd;
-      --soft: #7f96b0;
-      --cyan: #5de2ff;
-      --blue: #7aa7ff;
-      --gold: #f7c873;
-      --green: #82f2bd;
-      --danger: #ff9c9c;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+      color-scheme: light;
+      --page: #ffffff;
+      --bg: #eef7ff;
+      --bg-2: #dff1ff;
+      --panel: rgba(255, 255, 255, 0.86);
+      --panel-strong: rgba(255, 255, 255, 0.96);
+      --line: rgba(15, 76, 129, 0.14);
+      --line-strong: rgba(14, 165, 233, 0.42);
+      --text: #0b1726;
+      --muted: #475569;
+      --soft: #7890a8;
+      --cyan: #0ea5e9;
+      --blue: #2563eb;
+      --gold: #c88719;
+      --green: #0f9f6e;
+      --danger: #dc2626;
+      --shadow: 0 30px 80px rgba(15, 23, 42, 0.13);
       --radius: 8px;
       --max-slide: 1180px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -38,9 +40,9 @@
       min-height: 100%;
       margin: 0;
       background:
-        radial-gradient(circle at 18% 18%, rgba(93, 226, 255, 0.2), transparent 28%),
-        radial-gradient(circle at 82% 12%, rgba(122, 167, 255, 0.16), transparent 26%),
-        linear-gradient(135deg, #050b14 0%, var(--bg) 42%, #10284d 100%);
+        linear-gradient(120deg, rgba(14, 165, 233, 0.12), transparent 32%),
+        linear-gradient(315deg, rgba(200, 135, 25, 0.09), transparent 28%),
+        linear-gradient(180deg, var(--page) 0%, #f6fbff 54%, var(--bg) 100%);
       color: var(--text);
       overflow: hidden;
     }
@@ -52,10 +54,28 @@
       pointer-events: none;
       content: "";
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        linear-gradient(rgba(37, 99, 235, 0.065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 165, 233, 0.055) 1px, transparent 1px);
       background-size: 44px 44px;
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 82%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.92), transparent 86%);
+      animation: gridDrift 18s linear infinite;
+    }
+
+    body::after {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      content: "";
+      background:
+        linear-gradient(135deg, transparent 0 58%, rgba(14, 165, 233, 0.1) 58.2% 58.7%, transparent 58.9%),
+        linear-gradient(135deg, transparent 0 70%, rgba(200, 135, 25, 0.12) 70.1% 70.45%, transparent 70.8%);
+      opacity: 0.9;
+    }
+
+    @keyframes gridDrift {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 44px 44px, 44px 44px; }
     }
 
     a {
@@ -81,24 +101,43 @@
       z-index: 20;
       width: 100%;
       height: 5px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(15, 76, 129, 0.1);
+      overflow: hidden;
     }
 
     .progress-bar {
+      position: relative;
       width: 0%;
       height: 100%;
       background: linear-gradient(90deg, var(--cyan), var(--gold));
-      box-shadow: 0 0 24px rgba(93, 226, 255, 0.55);
+      box-shadow: 0 0 28px rgba(14, 165, 233, 0.24);
       transition: width 220ms ease;
+    }
+
+    .progress-bar::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+      transform: translateX(-100%);
+      animation: progressSheen 2.6s ease-in-out infinite;
+    }
+
+    @keyframes progressSheen {
+      0%, 35% { transform: translateX(-100%); }
+      65%, 100% { transform: translateX(120%); }
     }
 
     .deck-topbar {
       min-height: 72px;
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(160px, 0.75fr) minmax(240px, 1.5fr) minmax(220px, 0.75fr);
       align-items: center;
-      justify-content: space-between;
       gap: 16px;
       padding: 18px clamp(18px, 4vw, 52px) 10px;
+      border-bottom: 1px solid rgba(15, 76, 129, 0.08);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
     }
 
     .brand {
@@ -106,7 +145,7 @@
       align-items: center;
       gap: 12px;
       min-width: 0;
-      color: var(--muted);
+      color: #174569;
       font-size: 0.82rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -121,14 +160,53 @@
       flex: 0 0 auto;
       border: 1px solid var(--line-strong);
       border-radius: 8px;
-      background: linear-gradient(135deg, rgba(93, 226, 255, 0.22), rgba(247, 200, 115, 0.16));
-      box-shadow: 0 8px 26px rgba(93, 226, 255, 0.18);
+      background: linear-gradient(135deg, #e0f6ff, #fff4dc);
+      box-shadow: 0 10px 28px rgba(14, 165, 233, 0.17);
     }
 
     .brand-mark svg {
       width: 20px;
       height: 20px;
-      stroke: var(--text);
+      stroke: #0f4c81;
+    }
+
+    .slide-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .slide-dot {
+      width: 26px;
+      height: 26px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(15, 76, 129, 0.13);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #64748b;
+      font-size: 0.74rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      transition: transform 160ms ease, color 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .slide-dot:hover,
+    .slide-dot:focus-visible {
+      border-color: rgba(14, 165, 233, 0.55);
+      color: var(--blue);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .slide-dot.is-active {
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
     }
 
     .top-actions {
@@ -146,10 +224,11 @@
       padding: 8px 10px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(7, 17, 31, 0.46);
+      background: rgba(255, 255, 255, 0.9);
       color: var(--text);
       text-align: center;
       font-weight: 800;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
     }
 
     .keyboard-hint {
@@ -180,7 +259,7 @@
       display: grid;
       opacity: 1;
       transform: translateY(0) scale(1);
-      animation: slideIn 260ms ease both;
+      animation: slideIn 420ms cubic-bezier(0.19, 1, 0.22, 1) both;
     }
 
     @keyframes slideIn {
@@ -210,6 +289,7 @@
       letter-spacing: 0;
       font-weight: 900;
       text-wrap: balance;
+      text-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     }
 
     .slide-title.small {
@@ -248,17 +328,18 @@
       padding: 8px 12px;
       border: 1px solid rgba(93, 226, 255, 0.3);
       border-radius: 999px;
-      background: rgba(93, 226, 255, 0.1);
-      color: #dff8ff;
+      background: linear-gradient(180deg, #ffffff, #eef8ff);
+      color: #0f4c81;
       font-size: 0.88rem;
       font-weight: 800;
       white-space: nowrap;
+      box-shadow: 0 9px 24px rgba(14, 165, 233, 0.1);
     }
 
     .panel {
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(145deg, var(--panel-strong), rgba(8, 20, 38, 0.84));
+      background: linear-gradient(145deg, var(--panel-strong), rgba(240, 249, 255, 0.9));
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
     }
@@ -271,17 +352,20 @@
       position: relative;
       min-height: 420px;
       overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(231, 246, 255, 0.86)),
+        linear-gradient(120deg, transparent 0 58%, rgba(14, 165, 233, 0.18) 58% 59%, transparent 59%);
     }
 
     .signal-card::before {
       position: absolute;
       inset: 18px;
       content: "";
-      border: 1px solid rgba(93, 226, 255, 0.18);
+      border: 1px solid rgba(14, 165, 233, 0.18);
       border-radius: 8px;
       background:
-        linear-gradient(120deg, transparent 0 46%, rgba(93, 226, 255, 0.12) 46% 54%, transparent 54%),
-        radial-gradient(circle at 78% 20%, rgba(247, 200, 115, 0.18), transparent 32%);
+        linear-gradient(120deg, transparent 0 46%, rgba(14, 165, 233, 0.14) 46% 54%, transparent 54%),
+        linear-gradient(90deg, rgba(200, 135, 25, 0.1), transparent 34%);
     }
 
     .signal-content {
@@ -305,14 +389,15 @@
       min-height: 78px;
       border: 1px solid rgba(93, 226, 255, 0.2);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.045);
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     }
 
     .mini-map span:nth-child(2),
     .mini-map span:nth-child(5),
     .mini-map span:nth-child(9) {
-      background: rgba(93, 226, 255, 0.14);
-      border-color: rgba(93, 226, 255, 0.36);
+      background: rgba(14, 165, 233, 0.13);
+      border-color: rgba(14, 165, 233, 0.32);
     }
 
     .stat-row {
@@ -326,7 +411,8 @@
       padding: 14px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      background: rgba(4, 10, 20, 0.48);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
     }
 
     .stat strong {
@@ -389,8 +475,8 @@
       border: 1px solid rgba(93, 226, 255, 0.34);
       border-radius: 8px;
       background:
-        linear-gradient(135deg, rgba(93, 226, 255, 0.18), rgba(247, 200, 115, 0.12));
-      box-shadow: inset 0 0 0 6px rgba(7, 17, 31, 0.62);
+        linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(200, 135, 25, 0.12));
+      box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.72);
     }
 
     .number-list {
@@ -431,7 +517,8 @@
       overflow: hidden;
       border: 1px solid rgba(93, 226, 255, 0.24);
       border-radius: 8px;
-      background: rgba(2, 8, 18, 0.76);
+      background: #ffffff;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.1);
     }
 
     .prompt-top {
@@ -441,7 +528,8 @@
       gap: 12px;
       padding: 12px 14px;
       border-bottom: 1px solid rgba(93, 226, 255, 0.16);
-      color: var(--muted);
+      background: linear-gradient(180deg, #ffffff, #f3f8fc);
+      color: #174569;
       font-size: 0.82rem;
       font-weight: 800;
     }
@@ -451,11 +539,14 @@
       margin: 0;
       padding: 18px;
       overflow: auto;
-      color: #eaf6ff;
+      color: #1e293b;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
       font-size: clamp(0.82rem, 1.18vw, 0.96rem);
       line-height: 1.6;
       white-space: pre-wrap;
+      background:
+        linear-gradient(90deg, rgba(14, 165, 233, 0.05), transparent 18%),
+        #fbfdff;
     }
 
     .actions {
@@ -474,34 +565,35 @@
       padding: 10px 14px;
       border: 1px solid rgba(93, 226, 255, 0.36);
       border-radius: 8px;
-      background: rgba(93, 226, 255, 0.12);
+      background: #ffffff;
       color: var(--text);
       font-size: 0.92rem;
       font-weight: 850;
       text-decoration: none;
       cursor: pointer;
       transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
     }
 
     .btn:hover,
     .btn:focus-visible {
       border-color: rgba(93, 226, 255, 0.72);
-      background: rgba(93, 226, 255, 0.2);
+      background: #f0f9ff;
       transform: translateY(-1px);
       outline: none;
     }
 
     .btn.primary {
       border-color: transparent;
-      background: linear-gradient(135deg, var(--cyan), #82a7ff);
-      color: #04101e;
-      box-shadow: 0 12px 34px rgba(93, 226, 255, 0.28);
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #ffffff;
+      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.22);
     }
 
     .btn.gold {
       border-color: rgba(247, 200, 115, 0.5);
-      background: rgba(247, 200, 115, 0.14);
-      color: #ffe4aa;
+      background: #fff7e8;
+      color: #8a5a08;
     }
 
     .icon {
@@ -531,11 +623,12 @@
       padding: 14px;
       border: 1px solid rgba(93, 226, 255, 0.2);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.045);
+      background: rgba(255, 255, 255, 0.84);
       color: var(--text);
       text-align: center;
       font-weight: 850;
       line-height: 1.2;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
     }
 
     .flow-step span {
@@ -554,8 +647,8 @@
       width: 20px;
       height: 20px;
       content: "";
-      border-top: 2px solid rgba(93, 226, 255, 0.68);
-      border-right: 2px solid rgba(93, 226, 255, 0.68);
+      border-top: 2px solid rgba(14, 165, 233, 0.68);
+      border-right: 2px solid rgba(14, 165, 233, 0.68);
       transform: translateY(-50%) rotate(45deg);
     }
 
@@ -564,8 +657,8 @@
       padding: 18px;
       border-left: 4px solid var(--gold);
       border-radius: 8px;
-      background: rgba(247, 200, 115, 0.12);
-      color: #ffe4aa;
+      background: #fff7e8;
+      color: #7a4a00;
       line-height: 1.55;
       font-weight: 750;
     }
@@ -577,6 +670,7 @@
       justify-content: space-between;
       gap: 14px;
       padding: 8px clamp(18px, 4vw, 52px) 22px;
+      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.82));
     }
 
     .control-group {
@@ -590,7 +684,7 @@
       min-height: 42px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(7, 17, 31, 0.62);
+      background: rgba(255, 255, 255, 0.9);
       color: var(--text);
       font-size: 0.92rem;
       font-weight: 850;
@@ -600,7 +694,7 @@
     .nav-btn:hover,
     .nav-btn:focus-visible {
       border-color: rgba(93, 226, 255, 0.6);
-      background: rgba(93, 226, 255, 0.12);
+      background: #eef8ff;
       outline: none;
     }
 
@@ -618,8 +712,8 @@
       padding: 12px 14px;
       border: 1px solid rgba(130, 242, 189, 0.42);
       border-radius: 8px;
-      background: rgba(9, 37, 28, 0.94);
-      color: #d9ffe9;
+      background: rgba(235, 255, 246, 0.96);
+      color: #075b3f;
       font-size: 0.9rem;
       font-weight: 800;
       box-shadow: var(--shadow);
@@ -645,6 +739,21 @@
       }
 
       .keyboard-hint {
+        display: none;
+      }
+
+      .deck-topbar {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+      }
+
+      .slide-dots {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-block: 4px;
+        scrollbar-width: none;
+      }
+
+      .slide-dots::-webkit-scrollbar {
         display: none;
       }
 
@@ -697,6 +806,17 @@
 
       .brand span {
         display: none;
+      }
+
+      .deck-topbar {
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+      }
+
+      .slide-dot {
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
       }
 
       .slide-title {
@@ -760,6 +880,7 @@
         </span>
         <span>CustomGeminiAUD</span>
       </div>
+      <nav class="slide-dots" id="slideDots" aria-label="Navigasi slide"></nav>
       <div class="top-actions">
         <span class="keyboard-hint">Arrow keys, Space, Home, End</span>
         <span class="counter" id="slideCounter">1 / 12</span>
@@ -1033,12 +1154,23 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
     const slides = Array.from(document.querySelectorAll(".slide"));
     const progressBar = document.getElementById("progressBar");
     const slideCounter = document.getElementById("slideCounter");
+    const slideDots = document.getElementById("slideDots");
     const hashLabel = document.getElementById("hashLabel");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const toast = document.getElementById("toast");
     let current = 0;
     let toastTimer;
+
+    slides.forEach((slide, index) => {
+      const dot = document.createElement("button");
+      dot.className = "slide-dot";
+      dot.type = "button";
+      dot.textContent = String(index + 1);
+      dot.setAttribute("aria-label", `Buka slide ${index + 1}`);
+      dot.addEventListener("click", () => goToSlide(index));
+      slideDots.appendChild(dot);
+    });
 
     function clampSlide(value) {
       const parsed = Number.parseInt(value, 10);
@@ -1062,6 +1194,11 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       progressBar.style.width = `${percentage}%`;
       slideCounter.textContent = `${slideNumber} / ${slides.length}`;
       hashLabel.textContent = `#${slideNumber}`;
+      Array.from(slideDots.children).forEach((dot, index) => {
+        const active = index === current;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-current", active ? "step" : "false");
+      });
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === slides.length - 1;
       document.title = `${slideNumber} / ${slides.length} - Tatacara Nak Gunakan Chatbot Custom Gems`;
@@ -1096,12 +1233,18 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       textarea.value = text;
       textarea.setAttribute("readonly", "");
       textarea.style.position = "fixed";
-      textarea.style.left = "-9999px";
+      textarea.style.top = "0";
+      textarea.style.left = "0";
+      textarea.style.width = "1px";
+      textarea.style.height = "1px";
+      textarea.style.opacity = "0";
       document.body.appendChild(textarea);
+      textarea.focus();
       textarea.select();
-      document.execCommand("copy");
+      textarea.setSelectionRange(0, text.length);
+      const copied = document.execCommand("copy");
       textarea.remove();
-      showToast("Disalin ke clipboard.");
+      showToast(copied ? "Disalin ke clipboard." : "Sila salin teks secara manual.");
     }
 
     function showToast(message) {
