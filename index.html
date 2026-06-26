@@ -375,6 +375,18 @@
       box-shadow: 0 9px 24px rgba(14, 165, 233, 0.1);
     }
 
+    .hero-support {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .hero-support .pill-row {
+      margin-top: 0;
+      flex: 1 1 auto;
+    }
+
     .panel {
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -472,11 +484,10 @@
     }
 
     .qr-badge {
-      position: absolute;
-      top: clamp(18px, 2.4vw, 28px);
-      right: clamp(18px, 2.4vw, 28px);
-      z-index: 4;
-      width: clamp(124px, 11vw, 162px);
+      position: relative;
+      z-index: 2;
+      width: clamp(116px, 10vw, 144px);
+      flex: 0 0 clamp(116px, 10vw, 144px);
       display: grid;
       gap: 8px;
       padding: 10px;
@@ -1093,10 +1104,16 @@
         height: 20px;
       }
 
+      .hero-support {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
       .qr-badge {
-        top: 12px;
-        right: 12px;
         width: 92px;
+        flex-basis: 92px;
         gap: 5px;
         padding: 7px;
       }
@@ -1323,11 +1340,17 @@
             <h1 class="slide-title" id="slide-1-title">Custom Gemini V4 untuk Analisis Laporan Audit</h1>
             <p class="presenter-line">Mohamad Nurakmal bin Ab Rasid | Analisis laporan audit</p>
             <p class="subtitle">Aliran kerja ringkas untuk universiti awam dan institusi di bawah Kementerian Pendidikan Tinggi, daripada dokumen pengauditan kepada output analisis yang seragam, boleh disemak dan sedia dimasukkan ke templat slaid.</p>
-            <div class="pill-row" aria-label="Topik utama">
-              <span class="pill">Custom Gemini</span>
-              <span class="pill">Laporan Pengauditan</span>
-              <span class="pill">Prompt Standard</span>
-              <span class="pill">Output Analisis</span>
+            <div class="hero-support">
+              <div class="pill-row" aria-label="Topik utama">
+                <span class="pill">Custom Gemini</span>
+                <span class="pill">Laporan Pengauditan</span>
+                <span class="pill">Prompt Standard</span>
+                <span class="pill">Output Analisis</span>
+              </div>
+              <div class="qr-badge" aria-label="QR untuk imbas bahan pembentangan">
+                <img src="assets/slide-gems-qr.png" alt="QR untuk imbas bahan pembentangan">
+                <span>Imbas QR</span>
+              </div>
             </div>
           </div>
           <div class="panel signal-card is-portrait" aria-label="Visual Mohamad Nurakmal dan Gemini">
@@ -1344,10 +1367,6 @@
                   <path fill="url(#geminiGradient)" d="M12 2.2c1.55 4.85 4.1 7.4 9.2 9.8-5.1 2.4-7.65 4.95-9.2 9.8-1.55-4.85-4.1-7.4-9.2-9.8 5.1-2.4 7.65-4.95 9.2-9.8Z"></path>
                 </svg>
                 <span>Gemini</span>
-              </div>
-              <div class="qr-badge" aria-label="QR untuk imbas bahan pembentangan">
-                <img src="assets/slide-gems-qr.png" alt="QR untuk imbas bahan pembentangan">
-                <span>Imbas QR</span>
               </div>
               <div class="portrait-stage">
                 <span class="portrait-orbit" aria-hidden="true"></span>
