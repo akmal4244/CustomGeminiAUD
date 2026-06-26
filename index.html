@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tatacara Nak Gunakan Chatbot Custom Gems</title>
+  <title>Pembentangan Analisis Laporan</title>
   <meta name="description" content="Panduan penggunaan Custom Gemini untuk analisis dokumen pengauditan universiti awam.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffffff'/%3E%3Cpath d='M16 44h32M20 26h24M24 18h16M30 18v26M18 44 14 52h36l-4-8' stroke='%230ea5e9' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='48' cy='18' r='6' fill='%23c88719'/%3E%3C/svg%3E">
+  <link rel="icon" href="assets/jata-negara.svg" type="image/svg+xml">
   <style>
     :root {
       color-scheme: light;
@@ -157,21 +157,24 @@
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
+      width: 38px;
+      height: 38px;
       display: inline-grid;
       place-items: center;
       flex: 0 0 auto;
-      border: 1px solid var(--line-strong);
+      padding: 4px;
+      border: 1px solid rgba(200, 135, 25, 0.22);
       border-radius: 8px;
-      background: linear-gradient(135deg, #e0f6ff, #fff4dc);
-      box-shadow: 0 10px 28px rgba(14, 165, 233, 0.17);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
     }
 
-    .brand-mark svg {
-      width: 20px;
-      height: 20px;
-      stroke: #0f4c81;
+    .brand-logo {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.12));
     }
 
     .slide-dots {
@@ -825,26 +828,36 @@
         padding-inline: 14px;
       }
 
-      .brand {
-        display: none;
+      .deck-topbar {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 7px;
       }
 
-      .deck-topbar {
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 10px;
+      .brand {
+        gap: 0;
+      }
+
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+        padding: 3px;
+      }
+
+      .brand-name {
+        display: none;
       }
 
       .slide-dots {
         justify-content: space-between;
-        gap: 3px;
+        gap: 2px;
         overflow: visible;
       }
 
       .slide-dot {
-        width: 19px;
-        height: 19px;
-        flex: 0 0 19px;
-        font-size: 0.56rem;
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+        font-size: 0.48rem;
       }
 
       .counter {
@@ -930,16 +943,11 @@
 
   <div class="app">
     <header class="deck-topbar">
-      <div class="brand" aria-label="CustomGeminiAUD">
+      <div class="brand" aria-label="Pembentangan Analisis Laporan">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3v18"></path>
-            <path d="M5 8h14"></path>
-            <path d="M7 14h10"></path>
-            <path d="M9 20h6"></path>
-          </svg>
+          <img class="brand-logo" src="assets/jata-negara.svg" alt="">
         </span>
-        <span>CustomGeminiAUD</span>
+        <span class="brand-name">Pembentangan Analisis Laporan</span>
       </div>
       <nav class="slide-dots" id="slideDots" aria-label="Navigasi slide"></nav>
       <div class="top-actions">
@@ -952,7 +960,7 @@
       <section class="slide is-active" data-slide="1" aria-labelledby="slide-1-title">
         <div class="hero-grid">
           <div>
-            <h1 class="slide-title" id="slide-1-title">Tatacara Nak Gunakan Chatbot Custom Gems</h1>
+            <h1 class="slide-title" id="slide-1-title">Pembentangan Analisis Laporan</h1>
             <p class="subtitle">Panduan penggunaan Custom Gemini untuk analisis dokumen pengauditan universiti awam</p>
             <div class="pill-row" aria-label="Topik utama">
               <span class="pill">Custom Gemini</span>
@@ -1262,7 +1270,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       });
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === slides.length - 1;
-      document.title = `${slideNumber} / ${slides.length} - Tatacara Nak Gunakan Chatbot Custom Gems`;
+      document.title = `${slideNumber} / ${slides.length} - Pembentangan Analisis Laporan`;
       window.scrollTo(0, 0);
     }
 
