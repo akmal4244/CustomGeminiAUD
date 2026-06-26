@@ -1379,10 +1379,6 @@
         gap: 10px;
       }
 
-      .deck-controls .muted {
-        display: none;
-      }
-
       .control-group {
         width: 100%;
         display: grid;
@@ -1734,7 +1730,6 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
         <button class="nav-btn" id="prevBtn" type="button">Sebelumnya</button>
         <button class="nav-btn" id="nextBtn" type="button">Seterusnya</button>
       </div>
-      <div class="muted">URL hash: <span id="hashLabel">#1</span></div>
     </footer>
   </div>
 
@@ -1745,7 +1740,6 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
     const progressBar = document.getElementById("progressBar");
     const slideCounter = document.getElementById("slideCounter");
     const slideDots = document.getElementById("slideDots");
-    const hashLabel = document.getElementById("hashLabel");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const fullscreenBtn = document.getElementById("fullscreenBtn");
@@ -1784,7 +1778,6 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       const percentage = (slideNumber / slides.length) * 100;
       progressBar.style.width = `${percentage}%`;
       slideCounter.textContent = `${slideNumber} / ${slides.length}`;
-      hashLabel.textContent = `#${slideNumber}`;
       Array.from(slideDots.children).forEach((dot, index) => {
         const active = index === current;
         dot.classList.toggle("is-active", active);
