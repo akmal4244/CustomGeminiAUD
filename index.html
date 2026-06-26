@@ -226,6 +226,57 @@
       white-space: nowrap;
     }
 
+    .fullscreen-btn {
+      width: 40px;
+      height: 40px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #174569;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+      transition: transform 160ms ease, color 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .fullscreen-btn:hover,
+    .fullscreen-btn:focus-visible {
+      border-color: rgba(14, 165, 233, 0.45);
+      background: #ffffff;
+      color: var(--blue);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .fullscreen-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .fullscreen-btn .icon-compress {
+      display: none;
+    }
+
+    .fullscreen-btn.is-fullscreen .icon-expand {
+      display: none;
+    }
+
+    .fullscreen-btn.is-fullscreen .icon-compress {
+      display: block;
+    }
+
+    .fullscreen-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+      transform: none;
+    }
+
     .counter {
       min-width: 60px;
       padding: 8px 10px;
@@ -1231,6 +1282,11 @@
         font-size: 0.84rem;
       }
 
+      .fullscreen-btn {
+        width: 36px;
+        height: 36px;
+      }
+
       .slide-title {
         font-size: clamp(1.75rem, 10.5vw, 2.62rem);
         line-height: 1.02;
@@ -1330,6 +1386,28 @@
       <div class="top-actions">
         <span class="keyboard-hint">Anak panah, Space, Home, End</span>
         <span class="counter" id="slideCounter">1 / 11</span>
+        <button class="fullscreen-btn" id="fullscreenBtn" type="button" aria-label="Masuk skrin penuh" aria-pressed="false" title="Masuk skrin penuh">
+          <svg class="icon-expand" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 3H3v5"></path>
+            <path d="M3 3l7 7"></path>
+            <path d="M16 3h5v5"></path>
+            <path d="M21 3l-7 7"></path>
+            <path d="M8 21H3v-5"></path>
+            <path d="M3 21l7-7"></path>
+            <path d="M16 21h5v-5"></path>
+            <path d="M21 21l-7-7"></path>
+          </svg>
+          <svg class="icon-compress" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 3v7H3"></path>
+            <path d="M3 10l7-7"></path>
+            <path d="M14 3v7h7"></path>
+            <path d="M21 10l-7-7"></path>
+            <path d="M10 21v-7H3"></path>
+            <path d="M3 14l7 7"></path>
+            <path d="M14 21v-7h7"></path>
+            <path d="M21 14l-7 7"></path>
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -1620,6 +1698,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
     const hashLabel = document.getElementById("hashLabel");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
     const toast = document.getElementById("toast");
     let current = 0;
     let toastTimer;
@@ -1733,8 +1812,80 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       }, 1800);
     }
 
+    function getFullscreenElement() {
+      return document.fullscreenElement || document.webkitFullscreenElement || null;
+    }
+
+    function supportsFullscreen() {
+      const root = document.documentElement;
+      return Boolean(
+        (document.fullscreenEnabled && typeof root.requestFullscreen === "function") ||
+        (document.webkitFullscreenEnabled && typeof root.webkitRequestFullscreen === "function")
+      );
+    }
+
+    async function requestDeckFullscreen() {
+      const root = document.documentElement;
+      if (root.requestFullscreen) {
+        try {
+          await root.requestFullscreen({ navigationUI: "hide" });
+        } catch (error) {
+          await root.requestFullscreen();
+        }
+        return;
+      }
+      if (root.webkitRequestFullscreen) {
+        root.webkitRequestFullscreen();
+      }
+    }
+
+    async function exitDeckFullscreen() {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+        return;
+      }
+      if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+
+    function updateFullscreenButton() {
+      if (fullscreenBtn.disabled) {
+        fullscreenBtn.classList.remove("is-fullscreen");
+        fullscreenBtn.setAttribute("aria-pressed", "false");
+        return;
+      }
+      const isFullscreen = Boolean(getFullscreenElement());
+      fullscreenBtn.classList.toggle("is-fullscreen", isFullscreen);
+      fullscreenBtn.setAttribute("aria-pressed", String(isFullscreen));
+      fullscreenBtn.setAttribute("aria-label", isFullscreen ? "Keluar skrin penuh" : "Masuk skrin penuh");
+      fullscreenBtn.title = isFullscreen ? "Keluar skrin penuh" : "Masuk skrin penuh";
+    }
+
+    async function toggleFullscreen() {
+      if (!supportsFullscreen()) {
+        showToast("Fullscreen tidak disokong oleh browser ini.");
+        return;
+      }
+
+      try {
+        if (getFullscreenElement()) {
+          await exitDeckFullscreen();
+        } else {
+          await requestDeckFullscreen();
+        }
+      } catch (error) {
+        showToast("Fullscreen tidak dapat diaktifkan. Cuba tekan F11.");
+      } finally {
+        updateFullscreenButton();
+      }
+    }
+
     prevBtn.addEventListener("click", () => goToSlide(current - 1));
     nextBtn.addEventListener("click", () => goToSlide(current + 1));
+    fullscreenBtn.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", updateFullscreenButton);
+    document.addEventListener("webkitfullscreenchange", updateFullscreenButton);
 
     document.querySelectorAll("[data-copy-target]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -1749,7 +1900,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
     window.addEventListener("keydown", (event) => {
       const tagName = event.target.tagName.toLowerCase();
-      if (tagName === "input" || tagName === "textarea" || tagName === "select") return;
+      if (tagName === "input" || tagName === "textarea" || tagName === "select" || tagName === "button" || tagName === "a") return;
 
       switch (event.key) {
         case "ArrowRight":
@@ -1778,6 +1929,12 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
     if (!window.location.hash) {
       history.replaceState(null, "", "#1");
     }
+    if (!supportsFullscreen()) {
+      fullscreenBtn.disabled = true;
+      fullscreenBtn.title = "Fullscreen tidak disokong";
+      fullscreenBtn.setAttribute("aria-label", "Fullscreen tidak disokong");
+    }
+    updateFullscreenButton();
     render();
   </script>
 </body>
