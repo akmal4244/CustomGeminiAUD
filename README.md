@@ -13,6 +13,10 @@ https://akmal4244.github.io/CustomGeminiAUD/
 - Prompt semakan tally Bahagian 3 dan Bahagian 5
 - Prompt final lengkap
 - Checklist output analisis yang betul
+- Demo praktikal penggunaan Custom Gem
+- Semakan padanan ID Penemuan Bahagian 3 dan Bahagian 5
+- Kesilapan biasa semasa latihan
+- Jejak kerja selepas output siap
 
 ## Logo
 

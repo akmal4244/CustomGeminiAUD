@@ -873,6 +873,81 @@
       font-weight: 750;
     }
 
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .check-card {
+      min-height: 148px;
+      padding: 18px;
+      border: 1px solid rgba(93, 226, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .check-card strong {
+      display: block;
+      color: #174569;
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .check-card span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: clamp(0.92rem, 1.25vw, 1.02rem);
+      line-height: 1.48;
+    }
+
+    .mini-table {
+      display: grid;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .mini-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.48fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0;
+      overflow: hidden;
+      border: 1px solid rgba(93, 226, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .mini-row span {
+      min-width: 0;
+      padding: 13px 14px;
+      color: var(--muted);
+      font-size: clamp(0.86rem, 1.2vw, 0.98rem);
+      line-height: 1.42;
+    }
+
+    .mini-row span + span {
+      border-left: 1px solid rgba(15, 76, 129, 0.08);
+    }
+
+    .mini-row span:first-child {
+      color: #174569;
+      font-weight: 900;
+    }
+
+    .mini-row.is-head {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(200, 135, 25, 0.1));
+    }
+
+    .mini-row.is-head span {
+      color: var(--text);
+      font-weight: 900;
+    }
+
     .deck-controls {
       height: var(--controls-h);
       min-height: 0;
@@ -1051,6 +1126,32 @@
         bottom: -14px;
         transform: rotate(135deg);
       }
+
+      .check-grid {
+        grid-template-columns: 1fr;
+        max-height: min(48svh, 440px);
+        overflow: auto;
+        padding-right: 4px;
+      }
+
+      .check-card {
+        min-height: 0;
+      }
+
+      .mini-table {
+        max-height: min(48svh, 440px);
+        overflow: auto;
+        padding-right: 4px;
+      }
+
+      .mini-row {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-row span + span {
+        border-top: 1px solid rgba(15, 76, 129, 0.08);
+        border-left: 0;
+      }
     }
 
     @media (max-width: 640px) {
@@ -1088,9 +1189,10 @@
       }
 
       .slide-dots {
-        justify-content: space-between;
-        gap: 2px;
-        overflow: visible;
+        justify-content: flex-start;
+        gap: 3px;
+        overflow-x: auto;
+        padding-block: 4px;
       }
 
       .slide-dot {
@@ -1198,8 +1300,8 @@
       </div>
       <nav class="slide-dots" id="slideDots" aria-label="Navigasi slide"></nav>
       <div class="top-actions">
-        <span class="keyboard-hint">Arrow keys, Space, Home, End</span>
-        <span class="counter" id="slideCounter">1 / 12</span>
+        <span class="keyboard-hint">Anak panah, Space, Home, End</span>
+        <span class="counter" id="slideCounter">1 / 16</span>
       </div>
     </header>
 
@@ -1443,10 +1545,94 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       </section>
 
       <section class="slide" data-slide="12" aria-labelledby="slide-12-title">
+        <div class="content-card panel pad">
+          <p class="eyeline">Demo Praktikal</p>
+          <h2 class="slide-title small" id="slide-12-title">Tunjuk satu pusingan lengkap di Gemini</h2>
+          <p class="lead">Gunakan satu dokumen contoh semasa sesi latihan supaya peserta nampak aliran sebenar daripada upload hingga analisis akhir.</p>
+          <ol class="number-list">
+            <li>Buka Custom Gem dan pastikan sesi masih kosong.</li>
+            <li>Upload dokumen pengauditan yang hendak dianalisis.</li>
+            <li>Paste prompt pertama dan tunggu output penuh dijana.</li>
+            <li>Semak Bahagian 3, Bahagian 5 dan Rumusan Keseluruhan.</li>
+            <li>Jika tidak tally, masukkan prompt semakan sebelum terima output akhir.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="13" aria-labelledby="slide-13-title">
+        <div class="content-card panel pad">
+          <p class="eyeline">Semakan Tally</p>
+          <h2 class="slide-title small" id="slide-13-title">Padankan ID Penemuan sebelum guna output</h2>
+          <div class="mini-table" aria-label="Semakan padanan Bahagian 3 dan Bahagian 5">
+            <div class="mini-row is-head">
+              <span>Item semakan</span>
+              <span>Bahagian 3</span>
+              <span>Bahagian 5</span>
+            </div>
+            <div class="mini-row">
+              <span>ID Penemuan</span>
+              <span>Wujud dan konsisten.</span>
+              <span>ID sama mesti muncul semula.</span>
+            </div>
+            <div class="mini-row">
+              <span>Asas dokumen</span>
+              <span>Ada halaman, perenggan atau seksyen sokongan jika tersedia.</span>
+              <span>Tidak tambah isu luar dokumen.</span>
+            </div>
+            <div class="mini-row">
+              <span>Risiko</span>
+              <span>Penemuan utama dikenal pasti.</span>
+              <span>Kategori dan tahap risiko merujuk penemuan sama.</span>
+            </div>
+          </div>
+          <div class="callout">Jika ada ID hilang atau isu baharu muncul, jangan terus guna output. Minta Gemini semak dan betulkan tally dahulu.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="14" aria-labelledby="slide-14-title">
+        <div class="content-card panel pad">
+          <p class="eyeline">Kesilapan Biasa</p>
+          <h2 class="slide-title small" id="slide-14-title">Perkara yang perlu dielakkan semasa latihan</h2>
+          <div class="check-grid">
+            <div class="check-card">
+              <strong>Campur dokumen</strong>
+              <span>Elakkan upload dokumen daripada universiti atau tajuk audit berlainan dalam sesi yang sama.</span>
+            </div>
+            <div class="check-card">
+              <strong>Terima output tanpa semak</strong>
+              <span>Jangan terus salin analisis jika Bahagian 3 dan 5 belum dipadankan.</span>
+            </div>
+            <div class="check-card">
+              <strong>Biarkan ID berubah</strong>
+              <span>ID Penemuan perlu kekal sama daripada register penemuan hingga cadangan fokus pengurusan.</span>
+            </div>
+            <div class="check-card">
+              <strong>Guna dapatan contoh</strong>
+              <span>Pastikan Gemini tidak menarik dapatan daripada fail knowledge atau contoh universiti lain.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="15" aria-labelledby="slide-15-title">
+        <div class="content-card panel pad">
+          <p class="eyeline">Selepas Output Siap</p>
+          <h2 class="slide-title small" id="slide-15-title">Simpan jejak kerja dan pindahkan analisis dengan kemas</h2>
+          <ul class="list">
+            <li>Salin analisis akhir ke dokumen kerja atau kertas pembentangan.</li>
+            <li>Simpan prompt, tarikh sesi dan senarai dokumen yang dimuat naik sebagai rujukan kerja.</li>
+            <li>Tandakan semula bukti halaman / perenggan bagi penemuan yang kritikal atau tinggi.</li>
+            <li>Buat ringkasan tindakan pengurusan berdasarkan cadangan fokus dalam Bahagian 6.</li>
+            <li>Semak semula bahasa, istilah audit dan nama universiti sebelum diedarkan.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" data-slide="16" aria-labelledby="slide-16-title">
         <div class="two-col">
           <div>
             <p class="eyeline">Penutup</p>
-            <h2 class="slide-title small" id="slide-12-title">Gunakan prompt ini secara konsisten</h2>
+            <h2 class="slide-title small" id="slide-16-title">Gunakan prompt ini secara konsisten</h2>
             <p class="subtitle">Gunakan prompt ini secara konsisten supaya output analisis audit lebih kemas, terkawal dan tidak bercampur dengan dapatan contoh universiti lain.</p>
             <div class="actions">
               <a class="btn primary" href="https://gemini.google.com/gem/1oCCwoh43XiiUK_1A-1h9opU04BJsTqZN?usp=sharing" target="_blank" rel="noopener">
@@ -1474,8 +1660,8 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
     <footer class="deck-controls">
       <div class="control-group">
-        <button class="nav-btn" id="prevBtn" type="button">Previous</button>
-        <button class="nav-btn" id="nextBtn" type="button">Next</button>
+        <button class="nav-btn" id="prevBtn" type="button">Sebelumnya</button>
+        <button class="nav-btn" id="nextBtn" type="button">Seterusnya</button>
       </div>
       <div class="muted">URL hash: <span id="hashLabel">#1</span></div>
     </footer>
@@ -1531,6 +1717,9 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
         const active = index === current;
         dot.classList.toggle("is-active", active);
         dot.setAttribute("aria-current", active ? "step" : "false");
+        if (active && slideDots.scrollWidth > slideDots.clientWidth) {
+          dot.scrollIntoView({ block: "nearest", inline: "center" });
+        }
       });
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === slides.length - 1;
