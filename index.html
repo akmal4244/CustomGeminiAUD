@@ -744,6 +744,14 @@
       scrollbar-width: thin;
     }
 
+    .content-card.prompt-slide {
+      width: min(980px, 100%);
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+      overflow: hidden;
+    }
+
     .lead {
       margin: 0;
       color: var(--text);
@@ -855,6 +863,22 @@
       background:
         linear-gradient(90deg, rgba(14, 165, 233, 0.05), transparent 18%),
         #fbfdff;
+    }
+
+    .prompt-slide .prompt-box {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .prompt-slide pre {
+      max-height: none;
+      min-height: 0;
+    }
+
+    .prompt-slide .callout {
+      margin-top: 16px;
+      padding-block: 14px;
     }
 
     .actions {
@@ -1551,9 +1575,9 @@
       <section class="slide" data-slide="3" aria-labelledby="slide-3-title">
         <div class="two-col">
           <div>
-            <p class="eyeline">Page 3</p>
+            <p class="eyeline">Akses Custom Gemini</p>
             <h2 class="slide-title small" id="slide-3-title">Buka Custom Gemini V4</h2>
-            <p class="subtitle">Minta semua peserta buka pautan ini dahulu. Gunakan button terus ke Gemini atau copy link jika mahu buka di tab lain.</p>
+            <p class="subtitle">Minta semua peserta membuka pautan ini dahulu. Gunakan butang terus ke Gemini atau salin pautan jika mahu buka di tab lain.</p>
             <div class="actions">
               <a class="btn primary" href="https://gemini.google.com/gem/13soyVBmExhzZiL88kbKawhKt1rzceJrF?usp=sharing" target="_blank" rel="noopener">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
@@ -1561,7 +1585,7 @@
               </a>
               <button class="btn" type="button" data-copy-target="gem-link">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Copy Link
+                Salin Link
               </button>
             </div>
           </div>
@@ -1576,28 +1600,28 @@
 
       <section class="slide" data-slide="4" aria-labelledby="slide-4-title">
         <div class="content-card panel pad">
-          <p class="eyeline">Page 4</p>
-          <h2 class="slide-title small" id="slide-4-title">Upload dokumen tajuk pengauditan</h2>
+          <p class="eyeline">Muat Naik Dokumen</p>
+          <h2 class="slide-title small" id="slide-4-title">Muat naik dokumen tajuk pengauditan</h2>
           <p class="lead">Contoh latihan hari ini menggunakan 4 dokumen laporan tajuk pengauditan bagi Universiti Malaysia Kelantan (UMK). Prinsip yang sama boleh digunakan untuk universiti awam dan institusi lain.</p>
           <ol class="number-list">
             <li>Buka sesi Custom Gemini V4 yang sama.</li>
-            <li>Upload semua 4 dokumen laporan tajuk pengauditan contoh yang digunakan dalam latihan.</li>
+            <li>Muat naik semua 4 dokumen laporan tajuk pengauditan contoh yang digunakan dalam latihan.</li>
             <li>Pastikan dokumen daripada universiti awam dan institusi yang berbeza tidak bercampur dalam sesi ini.</li>
-            <li>Tunggu semua fail selesai upload sebelum mula masukkan prompt.</li>
+            <li>Tunggu semua fail selesai dimuat naik sebelum mula masukkan prompt.</li>
           </ol>
           <div class="callout">Prinsip mudah: satu tajuk audit, satu set dokumen, satu sesi Gemini.</div>
         </div>
       </section>
 
       <section class="slide" data-slide="5" aria-labelledby="slide-5-title">
-        <div class="content-card panel pad">
-          <p class="eyeline">Page 5</p>
-          <h2 class="slide-title small" id="slide-5-title">Full prompting untuk semua peserta</h2>
-          <p class="lead">Selepas semua dokumen dimuat naik, copy prompt ini, paste di Custom Gemini, kemudian tekan Enter / Start.</p>
+        <div class="content-card panel pad prompt-slide">
+          <p class="eyeline">Prompt Standard</p>
+          <h2 class="slide-title small" id="slide-5-title">Prompt penuh untuk semua peserta</h2>
+          <p class="lead">Selepas semua dokumen dimuat naik, salin prompt ini, tampal di Custom Gemini, kemudian tekan Enter untuk mula.</p>
           <div class="prompt-box">
             <div class="prompt-top">
-              <span>Preview full prompting</span>
-              <button class="btn gold" type="button" data-copy-target="prompt-full">Copy Full Prompt</button>
+              <span>Pratonton prompt penuh</span>
+              <button class="btn gold" type="button" data-copy-target="prompt-full">Salin Prompt Penuh</button>
             </div>
             <pre id="prompt-full">Sila jana analisis penuh berdasarkan dokumen pengauditan yang saya upload dalam sesi ini sahaja.
 
@@ -1626,7 +1650,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
       <section class="slide" data-slide="6" aria-labelledby="slide-6-title">
         <div class="content-card panel pad">
-          <p class="eyeline">Page 6</p>
+          <p class="eyeline">Semakan Output</p>
           <h2 class="slide-title small" id="slide-6-title">Semak output: mesti ada 6 bahagian</h2>
           <p class="lead">Output Custom Gemini mesti keluar dalam format yang sama supaya senang dimasukkan ke dalam slide.</p>
           <ol class="number-list">
@@ -1643,15 +1667,15 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
       <section class="slide" data-slide="7" aria-labelledby="slide-7-title">
         <div class="content-card panel pad">
-          <p class="eyeline">Page 7 - Bonus</p>
+          <p class="eyeline">Bonus Soal Jawab</p>
           <h2 class="slide-title small" id="slide-7-title">Tanya Custom Gemini untuk pecahkan maklumat</h2>
           <p class="subtitle">Selepas analisis lengkap siap, peserta boleh tanya soalan susulan untuk keluarkan maklumat dalam bentuk yang lebih mudah digunakan.</p>
           <div class="prompt-box">
             <div class="prompt-top">
               <span>Contoh prompt bonus</span>
-              <button class="btn" type="button" data-copy-target="bonus-prompt">Copy Contoh</button>
+              <button class="btn" type="button" data-copy-target="bonus-prompt">Salin Contoh</button>
             </div>
-            <pre id="bonus-prompt">Sila nyatakan semua isu penemuan bagi semua laporan yang dianalisis, berikan dalam bentuk table.</pre>
+            <pre id="bonus-prompt">Sila nyatakan semua isu penemuan bagi semua laporan yang dianalisis, berikan dalam bentuk jadual.</pre>
           </div>
           <ul class="list">
             <li>Sila senaraikan isu Kritikal dan Tinggi sahaja dalam bentuk jadual.</li>
@@ -1663,9 +1687,9 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
       <section class="slide" data-slide="8" aria-labelledby="slide-8-title">
         <div class="content-card panel pad">
-          <p class="eyeline">Page 8</p>
+          <p class="eyeline">Validasi Auditor</p>
           <h2 class="slide-title small" id="slide-8-title">Auditor semak semula output analisis</h2>
-          <p class="lead">Output Custom Gemini ialah draf bantuan. Auditor tetap perlu semak dengan source file dokumen yang dirujuk dalam output Gemini.</p>
+          <p class="lead">Output Custom Gemini ialah draf bantuan. Auditor tetap perlu semak dengan fail sumber dokumen yang dirujuk dalam output Gemini.</p>
           <ul class="list">
             <li>Bandingkan setiap ID Penemuan dengan dokumen asal.</li>
             <li>Semak bukti halaman, perenggan atau seksyen sokongan jika ada.</li>
@@ -1679,7 +1703,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
       <section class="slide" data-slide="9" aria-labelledby="slide-9-title">
         <div class="content-card panel pad">
-          <p class="eyeline">Page 9</p>
+          <p class="eyeline">Templat Slaid Seragam</p>
           <h2 class="slide-title small" id="slide-9-title">Masukkan output ke templat slaid</h2>
           <p class="subtitle">Pindahkan output yang telah disemak ke templat slaid supaya semua pembentangan auditor nampak seragam.</p>
           <ul class="list">
@@ -1695,9 +1719,9 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
 
       <section class="slide" data-slide="10" aria-labelledby="slide-10-title">
         <div class="content-card panel pad">
-          <p class="eyeline">Page 10</p>
+          <p class="eyeline">Rumusan Visual</p>
           <h2 class="slide-title small" id="slide-10-title">Buat rumusan visual menggunakan Gemini Image</h2>
-          <p class="lead">Convert output analisis kepada visual ringkasan untuk dijadikan background atau informasi sokongan kepada pihak pengurusan.</p>
+          <p class="lead">Tukarkan output analisis kepada visual ringkasan untuk dijadikan latar atau maklumat sokongan kepada pihak pengurusan.</p>
           <ol class="number-list">
             <li>Ambil rumusan Bahagian 6 dan isu Kritikal / Tinggi daripada output analisis.</li>
             <li>Minta Gemini Image hasilkan visual profesional yang ringkas dan mudah dibaca.</li>
@@ -1707,7 +1731,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
           <div class="prompt-box">
             <div class="prompt-top">
               <span>Contoh prompt Gemini Image</span>
-              <button class="btn" type="button" data-copy-target="image-prompt">Copy Prompt Image</button>
+              <button class="btn" type="button" data-copy-target="image-prompt">Salin Prompt Imej</button>
             </div>
             <pre id="image-prompt">Berdasarkan rumusan analisis audit ini, hasilkan idea visual ringkas untuk latar slide pengurusan. Fokus kepada risiko utama, impak dan tindakan pengurusan. Gaya profesional, bersih dan sesuai untuk pembentangan audit universiti awam dan institusi.</pre>
           </div>
@@ -1717,7 +1741,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       <section class="slide" data-slide="11" aria-labelledby="slide-11-title">
         <div class="two-col">
           <div>
-            <p class="eyeline">Page 11</p>
+            <p class="eyeline">Penutup</p>
             <h2 class="slide-title small" id="slide-11-title">Sekian, terima kasih</h2>
             <p class="subtitle">Semoga aliran kerja ini membantu auditor menjana analisis dengan lebih cepat, seragam dan masih berpaksikan bukti dokumen.</p>
             <div class="actions">
@@ -1727,7 +1751,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
               </a>
               <button class="btn gold" type="button" data-copy-target="prompt-full">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Copy Full Prompt
+                Salin Prompt Penuh
               </button>
             </div>
           </div>
