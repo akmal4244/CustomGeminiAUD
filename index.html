@@ -346,6 +346,11 @@
       overflow: hidden;
     }
 
+    .hero-grid > *,
+    .two-col > * {
+      min-width: 0;
+    }
+
     .slide-title {
       margin: 0;
       color: var(--text);
@@ -1292,6 +1297,11 @@
         line-height: 1.02;
       }
 
+      #slide-1-title {
+        font-size: clamp(1.64rem, 8.8vw, 2.28rem);
+        line-height: 1.03;
+      }
+
       .slide-title.small {
         font-size: clamp(1.48rem, 8.8vw, 2.35rem);
         line-height: 1.02;
@@ -1315,6 +1325,24 @@
         line-height: 1.42;
       }
 
+      .hero-grid,
+      .two-col {
+        height: 100%;
+        overflow: auto;
+        padding-right: 2px;
+      }
+
+      .hero-support {
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .hero-support .pill-row {
+        flex: 1 1 auto;
+      }
+
       .pill-row {
         gap: 8px;
         margin-top: 16px;
@@ -1330,23 +1358,55 @@
         padding: 16px;
       }
 
+      .signal-card.is-portrait {
+        height: clamp(168px, 28vh, 220px);
+      }
+
+      .signal-content {
+        padding: 12px;
+      }
+
+      .portrait-photo {
+        width: min(46%, 150px);
+      }
+
+      .qr-badge {
+        width: 82px;
+        flex-basis: 82px;
+        gap: 4px;
+        padding: 6px;
+      }
+
       .stat-row {
         grid-template-columns: 1fr;
       }
 
       .deck-controls {
-        align-items: stretch;
-        flex-direction: column;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
       }
 
-      .control-group,
+      .deck-controls .muted {
+        display: none;
+      }
+
+      .control-group {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
       .nav-btn {
         width: 100%;
-      }
-
-      .nav-btn {
         min-width: 0;
         min-height: 40px;
+      }
+
+      .prompt-top {
+        align-items: flex-start;
+        flex-wrap: wrap;
       }
 
       pre {
