@@ -1517,16 +1517,27 @@
 
       .slide-dots {
         justify-content: flex-start;
-        gap: 3px;
+        gap: 5px;
+        width: calc((22px * 5) + (5px * 4));
+        max-width: calc((22px * 5) + (5px * 4));
         overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scroll-padding-inline: 0;
+        scroll-snap-type: x proximity;
         padding-block: 4px;
+        justify-self: center;
       }
 
       .slide-dot {
-        width: 16px;
-        height: 16px;
-        flex: 0 0 16px;
-        font-size: 0.48rem;
+        width: 22px;
+        height: 22px;
+        flex: 0 0 22px;
+        padding: 0;
+        font-size: 0.64rem;
+        line-height: 1;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+        scroll-snap-align: center;
       }
 
       .counter {
@@ -1691,14 +1702,16 @@
       }
 
       .slide-dots {
-        gap: 2px;
+        gap: 5px;
+        width: calc((21px * 5) + (5px * 4));
+        max-width: calc((21px * 5) + (5px * 4));
       }
 
       .slide-dot {
-        width: 14px;
-        height: 14px;
-        flex-basis: 14px;
-        font-size: 0.43rem;
+        width: 21px;
+        height: 21px;
+        flex-basis: 21px;
+        font-size: 0.6rem;
       }
 
       .counter {
@@ -2108,6 +2121,17 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       return clampSlide(window.location.hash.replace("#", ""));
     }
 
+    function centerActiveDot(dot) {
+      if (!dot || slideDots.scrollWidth <= slideDots.clientWidth) return;
+      const dotLeft = dot.offsetLeft - slideDots.offsetLeft;
+      const left = dotLeft - ((slideDots.clientWidth - dot.offsetWidth) / 2);
+      const maxLeft = slideDots.scrollWidth - slideDots.clientWidth;
+      slideDots.scrollTo({
+        left: Math.min(Math.max(left, 0), maxLeft),
+        behavior: "smooth"
+      });
+    }
+
     function render() {
       slides.forEach((slide, index) => {
         const active = index === current;
@@ -2123,9 +2147,7 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
         const active = index === current;
         dot.classList.toggle("is-active", active);
         dot.setAttribute("aria-current", active ? "step" : "false");
-        if (active && slideDots.scrollWidth > slideDots.clientWidth) {
-          dot.scrollIntoView({ block: "nearest", inline: "center" });
-        }
+        if (active) centerActiveDot(dot);
       });
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === slides.length - 1;
