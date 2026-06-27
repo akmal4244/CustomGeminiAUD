@@ -363,8 +363,17 @@
     }
 
     #slide-1-title {
-      font-size: clamp(2rem, 4.2vw, 4rem);
+      font-size: clamp(2rem, 4vw, 3.85rem);
       line-height: 1.04;
+    }
+
+    #slide-1-title .title-line {
+      display: block;
+      white-space: nowrap;
+    }
+
+    #slide-1-title .title-line.is-compact {
+      font-size: 0.66em;
     }
 
     #slide-2-title {
@@ -1469,8 +1478,16 @@
       }
 
       #slide-1-title {
-        font-size: clamp(1.64rem, 8.8vw, 2.28rem);
+        font-size: clamp(1.64rem, 8.2vw, 2.1rem);
         line-height: 1.03;
+      }
+
+      #slide-1-title .title-line {
+        white-space: nowrap;
+      }
+
+      #slide-1-title .title-line.is-compact {
+        font-size: 0.66em;
       }
 
       .slide-title.small {
@@ -1650,7 +1667,10 @@
       <section class="slide is-active" data-slide="1" aria-labelledby="slide-1-title">
         <div class="hero-grid">
           <div>
-            <h1 class="slide-title" id="slide-1-title">Custom Gemini untuk Analisis Laporan Audit</h1>
+            <h1 class="slide-title" id="slide-1-title">
+              <span class="title-line">Custom Gemini</span>
+              <span class="title-line is-compact">untuk Analisis Laporan Audit</span>
+            </h1>
             <p class="subtitle">Aliran kerja ringkas untuk universiti awam dan institusi di bawah Kementerian Pendidikan Tinggi, daripada dokumen pengauditan kepada output analisis yang seragam, boleh disemak dan sedia dimasukkan ke templat slaid.</p>
             <div class="hero-support">
               <div class="pill-row hero-topic-row" aria-label="Topik utama">
