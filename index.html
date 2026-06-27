@@ -1685,13 +1685,19 @@
 
       .signal-card.is-portrait {
         height: auto;
-        min-height: 330px;
+        min-height: 0;
       }
 
       .signal-content {
         padding: 12px;
-        grid-template-rows: minmax(0, 1fr) auto;
+        height: auto;
+        grid-template-rows: auto auto;
         gap: 10px;
+      }
+
+      .portrait-stage {
+        min-height: clamp(280px, 42svh, 360px);
+        place-items: center;
       }
 
       .portrait-footer {
@@ -1724,7 +1730,8 @@
       }
 
       .portrait-photo {
-        width: min(50%, 158px);
+        width: min(76%, 260px);
+        max-height: none;
       }
 
       .portrait-nameplate {
@@ -2138,19 +2145,53 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
         <div class="content-card panel pad">
           <p class="eyeline">Rumusan Visual</p>
           <h2 class="slide-title small one-line-title" id="slide-10-title">Buat rumusan visual menggunakan Gemini Image</h2>
-          <p class="lead">Tukarkan output analisis kepada visual ringkasan untuk dijadikan latar atau maklumat sokongan kepada pihak pengurusan.</p>
+          <p class="lead">Tukarkan rumusan analisis kepada rangka JSON dahulu, kemudian gunakan JSON itu dalam chat baharu Gemini Image.</p>
           <ol class="number-list">
-            <li>Ambil rumusan Bahagian 6 dan isu Kritikal / Tinggi daripada output analisis.</li>
-            <li>Minta Gemini Image hasilkan visual profesional yang ringkas dan mudah dibaca.</li>
-            <li>Gunakan visual sebagai latar slide, kemudian letakkan teks utama di hadapan.</li>
-            <li>Pastikan visual tidak menggantikan bukti dokumen dan tidak mendedahkan maklumat sensitif.</li>
+            <li>Ambil Rumusan Keseluruhan, tahap risiko, isu Kritikal / Tinggi dan cadangan fokus pengurusan daripada output analisis.</li>
+            <li>Salin prompt JSON di bawah dan minta Custom Gemini sediakan rangka visual dalam bentuk JSON text sahaja.</li>
+            <li>Buka chat Gemini baharu yang fokus kepada Gemini Image, kemudian tampal JSON tersebut untuk jana visual.</li>
+            <li>Gunakan visual sebagai latar atau maklumat sokongan slide pengurusan, tanpa menggantikan bukti dokumen.</li>
           </ol>
           <div class="prompt-box">
             <div class="prompt-top">
-              <span>Contoh prompt Gemini Image</span>
-              <button class="btn" type="button" data-copy-target="image-prompt">Salin Prompt Imej</button>
+              <span>Prompt rangka JSON untuk Gemini Image</span>
+              <button class="btn" type="button" data-copy-target="image-prompt">Salin Prompt JSON</button>
             </div>
-            <pre id="image-prompt">Berdasarkan rumusan analisis audit ini, hasilkan idea visual ringkas untuk latar slide pengurusan. Fokus kepada risiko utama, impak dan tindakan pengurusan. Gaya profesional, bersih dan sesuai untuk pembentangan audit universiti awam dan institusi.</pre>
+            <pre id="image-prompt">Sila tukarkan rumusan analisis audit di bawah kepada rangka visual dalam format JSON text sahaja untuk digunakan dalam chat baharu Gemini Image.
+
+Arahan output:
+- Berikan JSON sah sahaja, tanpa markdown dan tanpa penerangan tambahan.
+- Gunakan Bahasa Melayu Malaysia yang ringkas dan profesional.
+- Fokus kepada mesej pengurusan, risiko Kritikal / Tinggi, impak dan tindakan fokus pengurusan.
+- Jangan masukkan maklumat sensitif, nama individu atau butiran yang tidak perlu dipaparkan dalam visual.
+- Pastikan visual sesuai sebagai latar slide 16:9 untuk pembentangan audit.
+
+Struktur JSON wajib:
+{
+  "tajuk_visual": "",
+  "mesej_utama": "",
+  "ringkasan_pengurusan": "",
+  "risiko_utama": [
+    {
+      "id_penemuan": "",
+      "isu": "",
+      "tahap_risiko": "",
+      "impak": "",
+      "tindakan_fokus": ""
+    }
+  ],
+  "gaya_visual": {
+    "format": "latar slide 16:9",
+    "mood": "profesional, bersih, eksekutif dan mudah dibaca",
+    "warna": ["biru muda", "putih", "emas lembut"],
+    "elemen_visual": [],
+    "elakkan": ["teks terlalu banyak", "maklumat sensitif", "logo tidak dibenarkan"]
+  },
+  "prompt_gemini_image": ""
+}
+
+Bahan analisis:
+[Tampal Rumusan Bahagian 6, isu Kritikal / Tinggi dan cadangan fokus pengurusan di sini]</pre>
           </div>
         </div>
       </section>
