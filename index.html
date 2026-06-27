@@ -454,7 +454,8 @@
       max-width: 100%;
       flex: 0 0 100%;
       flex-wrap: nowrap;
-      gap: 8px;
+      min-width: 0;
+      gap: 7px;
       overflow-x: auto;
       padding-bottom: 2px;
       scrollbar-width: none;
@@ -466,8 +467,9 @@
 
     .hero-topic-row .pill {
       min-height: 30px;
-      padding: 6px 10px;
-      font-size: 0.78rem;
+      padding: 6px 9px;
+      font-size: clamp(0.7rem, 0.72vw, 0.78rem);
+      flex: 0 0 auto;
     }
 
     .panel {
@@ -576,16 +578,17 @@
       position: relative;
       z-index: 4;
       width: auto;
+      min-width: 0;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 8px;
+      gap: 6px;
       flex: 0 0 auto;
     }
 
     .gemini-tools .gemini-badge,
     .gemini-tools .qr-trigger {
-      min-height: 48px;
+      min-height: 38px;
       border-color: rgba(14, 165, 233, 0.24);
       background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
@@ -593,14 +596,25 @@
     }
 
     .gemini-tools .gemini-badge {
-      min-width: 100px;
+      width: 38px;
+      min-width: 38px;
       justify-content: center;
-      padding: 8px 10px;
+      padding: 5px;
+    }
+
+    .gemini-tools .gemini-badge span,
+    .gemini-tools .qr-trigger span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     .gemini-mark {
-      width: 24px;
-      height: 24px;
+      width: 21px;
+      height: 21px;
       flex: 0 0 auto;
       filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.22));
       animation: geminiTwinkle 2.8s ease-in-out infinite;
@@ -609,12 +623,12 @@
     .qr-trigger {
       position: relative;
       z-index: 4;
-      width: 50px;
-      min-height: 48px;
+      width: 38px;
+      min-height: 38px;
       display: grid;
       place-items: center;
       gap: 2px;
-      padding: 7px 8px;
+      padding: 5px;
       border: 1px solid rgba(14, 165, 233, 0.26);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.94);
@@ -634,8 +648,8 @@
     }
 
     .qr-trigger img {
-      width: 30px;
-      height: 30px;
+      width: 22px;
+      height: 22px;
       display: block;
       border-radius: 3px;
       object-fit: contain;
@@ -700,12 +714,14 @@
     .portrait-footer {
       position: relative;
       z-index: 5;
-      width: min(96%, 580px);
+      width: 100%;
+      max-width: min(100%, 600px);
       justify-self: center;
       display: grid;
-      grid-template-columns: minmax(260px, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      box-sizing: border-box;
     }
 
     .portrait-nameplate {
@@ -720,6 +736,8 @@
       color: #174569;
       text-align: center;
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .portrait-footer .portrait-nameplate {
@@ -733,22 +751,24 @@
     }
 
     .portrait-nameplate strong {
-      font-size: clamp(0.86rem, 1.25vw, 1rem);
+      font-size: clamp(1.04rem, 1.45vw, 1.28rem);
       line-height: 1.2;
       font-weight: 900;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
     }
 
     .portrait-nameplate span {
       margin-top: 2px;
       color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.8rem;
       line-height: 1.2;
       font-weight: 800;
     }
 
     .portrait-nameplate .nameplate-unit {
       color: #174569;
-      font-size: 0.68rem;
+      font-size: 0.74rem;
       line-height: 1.18;
       font-weight: 850;
     }
@@ -1407,24 +1427,25 @@
       }
 
       .gemini-tools .gemini-badge {
-        min-width: 100px;
-        min-height: 48px;
+        width: 38px;
+        min-width: 38px;
+        min-height: 38px;
       }
 
       .qr-trigger {
-        width: 46px;
-        min-height: 46px;
+        width: 38px;
+        min-height: 38px;
         padding: 4px;
       }
 
       .gemini-tools .qr-trigger {
-        width: 48px;
-        min-height: 48px;
+        width: 38px;
+        min-height: 38px;
       }
 
       .qr-trigger img {
-        width: 27px;
-        height: 27px;
+        width: 22px;
+        height: 22px;
       }
 
       .gemini-mark {
@@ -1449,15 +1470,15 @@
       }
 
       .portrait-nameplate strong {
-        font-size: 0.82rem;
+        font-size: 0.96rem;
       }
 
       .portrait-nameplate span {
-        font-size: 0.64rem;
+        font-size: 0.72rem;
       }
 
       .portrait-nameplate .nameplate-unit {
-        font-size: 0.6rem;
+        font-size: 0.68rem;
       }
 
       .portrait-stats {
@@ -1711,22 +1732,21 @@
       }
 
       .portrait-footer .gemini-tools .gemini-badge {
-        min-width: 88px;
-        min-height: 44px;
-        padding: 7px 8px;
-        gap: 6px;
-        font-size: 0.78rem;
+        width: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        padding: 5px;
       }
 
       .portrait-footer .gemini-tools .qr-trigger {
-        width: 46px;
-        min-height: 44px;
-        padding: 4px;
+        width: 36px;
+        min-height: 36px;
+        padding: 5px;
       }
 
       .portrait-footer .gemini-tools .qr-trigger img {
-        width: 24px;
-        height: 24px;
+        width: 21px;
+        height: 21px;
       }
 
       .portrait-photo {
@@ -1736,6 +1756,18 @@
 
       .portrait-nameplate {
         padding: 7px 9px;
+      }
+
+      .portrait-nameplate strong {
+        font-size: 0.9rem;
+      }
+
+      .portrait-nameplate span {
+        font-size: 0.68rem;
+      }
+
+      .portrait-nameplate .nameplate-unit {
+        font-size: 0.64rem;
       }
 
       .qr-dialog-panel {
@@ -1822,24 +1854,15 @@
       }
 
       .portrait-footer .gemini-tools .gemini-badge {
-        width: 44px;
-        min-width: 44px;
-        min-height: 42px;
-        padding: 6px;
-      }
-
-      .portrait-footer .gemini-tools .gemini-badge span {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
+        width: 34px;
+        min-width: 34px;
+        min-height: 34px;
+        padding: 5px;
       }
 
       .portrait-footer .gemini-tools .qr-trigger {
-        width: 42px;
-        min-height: 42px;
+        width: 34px;
+        min-height: 34px;
       }
 
       .counter {
