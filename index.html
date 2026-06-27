@@ -1021,6 +1021,22 @@
       padding-block: 14px;
     }
 
+    .bonus-prompt-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .bonus-prompt-stack .prompt-box {
+      margin-top: 0;
+    }
+
+    .bonus-prompt-stack pre {
+      max-height: none;
+      padding-block: 14px;
+      overflow: visible;
+    }
+
     .actions {
       display: flex;
       flex-wrap: wrap;
@@ -1254,7 +1270,7 @@
     .toast {
       position: fixed;
       right: clamp(18px, 4vw, 52px);
-      bottom: 90px;
+      top: calc(var(--topbar-h) + 14px);
       z-index: 30;
       max-width: min(340px, calc(100vw - 36px));
       padding: 12px 14px;
@@ -1266,7 +1282,7 @@
       font-weight: 800;
       box-shadow: var(--shadow);
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(-12px);
       pointer-events: none;
       transition: opacity 160ms ease, transform 160ms ease;
     }
@@ -1848,18 +1864,36 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
           <p class="eyeline">Bonus Soal Jawab</p>
           <h2 class="slide-title small one-line-title" id="slide-7-title">Tanya Custom Gemini untuk pecahkan maklumat</h2>
           <p class="subtitle">Selepas analisis lengkap siap, peserta boleh tanya soalan susulan untuk keluarkan maklumat dalam bentuk yang lebih mudah digunakan.</p>
-          <div class="prompt-box">
-            <div class="prompt-top">
-              <span>Contoh prompt bonus</span>
-              <button class="btn" type="button" data-copy-target="bonus-prompt">Salin Contoh</button>
+          <div class="bonus-prompt-stack">
+            <div class="prompt-box">
+              <div class="prompt-top">
+                <span>Contoh prompt bonus 1</span>
+                <button class="btn" type="button" data-copy-target="bonus-prompt-1">Salin Contoh</button>
+              </div>
+              <pre id="bonus-prompt-1">Sila nyatakan semua isu penemuan bagi semua laporan yang dianalisis, berikan dalam bentuk jadual.</pre>
             </div>
-            <pre id="bonus-prompt">Sila nyatakan semua isu penemuan bagi semua laporan yang dianalisis, berikan dalam bentuk jadual.</pre>
+            <div class="prompt-box">
+              <div class="prompt-top">
+                <span>Contoh prompt bonus 2</span>
+                <button class="btn" type="button" data-copy-target="bonus-prompt-2">Salin Contoh</button>
+              </div>
+              <pre id="bonus-prompt-2">Sila senaraikan isu Kritikal dan Tinggi sahaja dalam bentuk jadual.</pre>
+            </div>
+            <div class="prompt-box">
+              <div class="prompt-top">
+                <span>Contoh prompt bonus 3</span>
+                <button class="btn" type="button" data-copy-target="bonus-prompt-3">Salin Contoh</button>
+              </div>
+              <pre id="bonus-prompt-3">Sila ringkaskan cadangan fokus pengurusan kepada 5 tindakan utama.</pre>
+            </div>
+            <div class="prompt-box">
+              <div class="prompt-top">
+                <span>Contoh prompt bonus 4</span>
+                <button class="btn" type="button" data-copy-target="bonus-prompt-4">Salin Contoh</button>
+              </div>
+              <pre id="bonus-prompt-4">Sila susun semua penemuan mengikut kategori risiko dan ID Penemuan.</pre>
+            </div>
           </div>
-          <ul class="list">
-            <li>Sila senaraikan isu Kritikal dan Tinggi sahaja dalam bentuk jadual.</li>
-            <li>Sila ringkaskan cadangan fokus pengurusan kepada 5 tindakan utama.</li>
-            <li>Sila susun semua penemuan mengikut kategori risiko dan ID Penemuan.</li>
-          </ul>
         </div>
       </section>
 
