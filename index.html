@@ -534,7 +534,7 @@
       z-index: 1;
       height: 100%;
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr) auto;
+      grid-template-rows: minmax(0, 1fr) auto;
       align-content: stretch;
       gap: 16px;
       padding: clamp(20px, 3vw, 34px);
@@ -554,24 +554,38 @@
       color: #123b64;
       font-size: 0.86rem;
       font-weight: 900;
+      text-decoration: none;
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
       animation: geminiFloat 5.5s ease-in-out infinite;
+    }
+
+    .gemini-link {
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .gemini-link:hover,
+    .gemini-link:focus-visible {
+      border-color: rgba(14, 165, 233, 0.72);
+      transform: translateY(-1px);
+      outline: none;
+      box-shadow: 0 16px 34px rgba(14, 165, 233, 0.16);
     }
 
     .gemini-tools {
       position: relative;
       z-index: 4;
-      justify-self: center;
-      width: 100%;
+      width: auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
+      justify-content: flex-end;
+      gap: 8px;
+      flex: 0 0 auto;
     }
 
     .gemini-tools .gemini-badge,
     .gemini-tools .qr-trigger {
-      min-height: 58px;
+      min-height: 48px;
       border-color: rgba(14, 165, 233, 0.24);
       background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
@@ -579,9 +593,9 @@
     }
 
     .gemini-tools .gemini-badge {
-      min-width: 138px;
+      min-width: 100px;
       justify-content: center;
-      padding: 10px 16px;
+      padding: 8px 10px;
     }
 
     .gemini-mark {
@@ -595,8 +609,8 @@
     .qr-trigger {
       position: relative;
       z-index: 4;
-      width: 66px;
-      min-height: 58px;
+      width: 50px;
+      min-height: 48px;
       display: grid;
       place-items: center;
       gap: 2px;
@@ -683,6 +697,17 @@
       animation: portraitFloat 5.6s ease-in-out infinite;
     }
 
+    .portrait-footer {
+      position: relative;
+      z-index: 5;
+      width: min(96%, 580px);
+      justify-self: center;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+    }
+
     .portrait-nameplate {
       position: relative;
       z-index: 3;
@@ -695,6 +720,11 @@
       color: #174569;
       text-align: center;
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .portrait-footer .portrait-nameplate {
+      width: 100%;
+      justify-self: stretch;
     }
 
     .portrait-nameplate strong,
@@ -1367,7 +1397,7 @@
       }
 
       .signal-card.is-portrait .signal-content {
-        grid-template-rows: auto minmax(0, 1fr) auto;
+        grid-template-rows: minmax(0, 1fr) auto;
       }
 
       .gemini-badge {
@@ -1377,8 +1407,8 @@
       }
 
       .gemini-tools .gemini-badge {
-        min-width: 136px;
-        min-height: 56px;
+        min-width: 100px;
+        min-height: 48px;
       }
 
       .qr-trigger {
@@ -1388,8 +1418,8 @@
       }
 
       .gemini-tools .qr-trigger {
-        width: 58px;
-        min-height: 56px;
+        width: 48px;
+        min-height: 48px;
       }
 
       .qr-trigger img {
@@ -1487,6 +1517,22 @@
         --controls-h: 64px;
       }
 
+      html,
+      body {
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .app {
+        min-height: 100svh;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+      }
+
       .deck-topbar,
       .deck-controls {
         padding-inline: 14px;
@@ -1494,6 +1540,9 @@
 
       .deck {
         padding-inline: 14px;
+        height: auto;
+        min-height: calc(100svh - var(--topbar-h) - var(--controls-h));
+        overflow: visible;
       }
 
       .deck-topbar {
@@ -1593,9 +1642,10 @@
 
       .hero-grid,
       .two-col {
-        height: 100%;
-        overflow: auto;
-        padding-right: 2px;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
       }
 
       .hero-support {
@@ -1625,6 +1675,8 @@
         min-height: 30px;
         padding: 6px 10px;
         font-size: 0.78rem;
+        white-space: normal;
+        overflow-wrap: anywhere;
       }
 
       .panel.pad {
@@ -1632,11 +1684,43 @@
       }
 
       .signal-card.is-portrait {
-        height: clamp(230px, 35vh, 290px);
+        height: auto;
+        min-height: 330px;
       }
 
       .signal-content {
         padding: 12px;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 10px;
+      }
+
+      .portrait-footer {
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+      }
+
+      .portrait-footer .gemini-tools {
+        gap: 6px;
+      }
+
+      .portrait-footer .gemini-tools .gemini-badge {
+        min-width: 88px;
+        min-height: 44px;
+        padding: 7px 8px;
+        gap: 6px;
+        font-size: 0.78rem;
+      }
+
+      .portrait-footer .gemini-tools .qr-trigger {
+        width: 46px;
+        min-height: 44px;
+        padding: 4px;
+      }
+
+      .portrait-footer .gemini-tools .qr-trigger img {
+        width: 24px;
+        height: 24px;
       }
 
       .portrait-photo {
@@ -1684,10 +1768,22 @@
       }
 
       pre {
-        max-height: min(38svh, 320px);
+        max-height: none;
         padding: 14px;
         font-size: 0.78rem;
         line-height: 1.55;
+        overflow: visible;
+      }
+
+      .content-card,
+      .content-card.prompt-slide {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+      }
+
+      .prompt-slide .prompt-box {
+        overflow: visible;
       }
     }
 
@@ -1712,6 +1808,31 @@
         height: 21px;
         flex-basis: 21px;
         font-size: 0.6rem;
+      }
+
+      .portrait-footer .gemini-tools {
+        gap: 5px;
+      }
+
+      .portrait-footer .gemini-tools .gemini-badge {
+        width: 44px;
+        min-width: 44px;
+        min-height: 42px;
+        padding: 6px;
+      }
+
+      .portrait-footer .gemini-tools .gemini-badge span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      .portrait-footer .gemini-tools .qr-trigger {
+        width: 42px;
+        min-height: 42px;
       }
 
       .counter {
@@ -1799,33 +1920,35 @@
           </div>
           <div class="panel signal-card is-portrait" aria-label="Visual Mohamad Nurakmal dan Gemini">
             <div class="signal-content">
-              <div class="gemini-tools">
-                <div class="gemini-badge" aria-label="Gemini">
-                  <svg class="gemini-mark" viewBox="0 0 24 24" aria-hidden="true">
-                    <defs>
-                      <linearGradient id="geminiGradient" x1="3" y1="21" x2="21" y2="3" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#2563eb"></stop>
-                        <stop offset="0.5" stop-color="#0ea5e9"></stop>
-                        <stop offset="1" stop-color="#c88719"></stop>
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#geminiGradient)" d="M12 2.2c1.55 4.85 4.1 7.4 9.2 9.8-5.1 2.4-7.65 4.95-9.2 9.8-1.55-4.85-4.1-7.4-9.2-9.8 5.1-2.4 7.65-4.95 9.2-9.8Z"></path>
-                  </svg>
-                  <span>Gemini</span>
-                </div>
-                <button class="qr-trigger" type="button" data-open-qr aria-label="Buka QR besar untuk imbas" aria-haspopup="dialog" aria-controls="qrDialog">
-                  <img src="assets/slide-gems-qr.png" alt="">
-                  <span>QR</span>
-                </button>
-              </div>
               <div class="portrait-stage">
                 <span class="portrait-orbit" aria-hidden="true"></span>
                 <img class="portrait-photo" src="assets/mohamad-nurakmal.png" alt="Mohamad Nurakmal bin Ab Rasid">
               </div>
-              <div class="portrait-nameplate">
-                <strong>Mohamad Nurakmal bin Ab Rasid</strong>
-                <span>Pegawai Teknologi Maklumat Kanan</span>
-                <span class="nameplate-unit">Unit Audit Dalam, Kementerian Pendidikan Tinggi</span>
+              <div class="portrait-footer">
+                <div class="portrait-nameplate">
+                  <strong>Mohamad Nurakmal bin Ab Rasid</strong>
+                  <span>Pegawai Teknologi Maklumat Kanan</span>
+                  <span class="nameplate-unit">Unit Audit Dalam, Kementerian Pendidikan Tinggi</span>
+                </div>
+                <div class="gemini-tools">
+                  <a class="gemini-badge gemini-link" href="https://gemini.google.com/gem/13soyVBmExhzZiL88kbKawhKt1rzceJrF?usp=sharing" target="_blank" rel="noopener" aria-label="Buka Custom Gemini">
+                    <svg class="gemini-mark" viewBox="0 0 24 24" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="geminiGradient" x1="3" y1="21" x2="21" y2="3" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#2563eb"></stop>
+                          <stop offset="0.5" stop-color="#0ea5e9"></stop>
+                          <stop offset="1" stop-color="#c88719"></stop>
+                        </linearGradient>
+                      </defs>
+                      <path fill="url(#geminiGradient)" d="M12 2.2c1.55 4.85 4.1 7.4 9.2 9.8-5.1 2.4-7.65 4.95-9.2 9.8-1.55-4.85-4.1-7.4-9.2-9.8 5.1-2.4 7.65-4.95 9.2-9.8Z"></path>
+                    </svg>
+                    <span>Gemini</span>
+                  </a>
+                  <button class="qr-trigger" type="button" data-open-qr aria-label="Buka QR besar untuk imbas" aria-haspopup="dialog" aria-controls="qrDialog">
+                    <img src="assets/slide-gems-qr.png" alt="">
+                    <span>QR</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
