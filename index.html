@@ -372,6 +372,14 @@
       line-height: 1.04;
     }
 
+    .slide-title.one-line-title {
+      max-width: 100%;
+      font-size: clamp(2rem, 2.7vw, 3rem);
+      line-height: 1.03;
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
     .subtitle {
       max-width: 760px;
       margin: 18px 0 0;
@@ -1475,6 +1483,13 @@
         line-height: 1.05;
       }
 
+      .slide-title.one-line-title {
+        font-size: clamp(1.42rem, 5.7vw, 2rem);
+        line-height: 1.08;
+        white-space: normal;
+        text-wrap: balance;
+      }
+
       .subtitle {
         margin-top: 12px;
         font-size: 0.92rem;
@@ -1725,7 +1740,7 @@
       <section class="slide" data-slide="4" aria-labelledby="slide-4-title">
         <div class="content-card panel pad">
           <p class="eyeline">Muat Naik Dokumen</p>
-          <h2 class="slide-title small" id="slide-4-title">Muat naik dokumen tajuk pengauditan</h2>
+          <h2 class="slide-title small one-line-title" id="slide-4-title">Muat naik dokumen tajuk pengauditan</h2>
           <p class="lead">Contoh latihan hari ini menggunakan 4 dokumen laporan tajuk pengauditan bagi Universiti Malaysia Kelantan (UMK). Prinsip yang sama boleh digunakan untuk universiti awam dan institusi lain.</p>
           <ol class="number-list">
             <li>Buka sesi Custom Gemini yang sama.</li>
