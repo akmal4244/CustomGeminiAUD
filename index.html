@@ -372,21 +372,6 @@
       line-height: 1.04;
     }
 
-    .presenter-line {
-      width: fit-content;
-      max-width: 100%;
-      margin: 18px 0 0;
-      padding: 9px 13px;
-      border: 1px solid rgba(200, 135, 25, 0.24);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-      color: #174569;
-      font-size: clamp(0.92rem, 1.25vw, 1.04rem);
-      line-height: 1.35;
-      font-weight: 800;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
-    }
-
     .subtitle {
       max-width: 760px;
       margin: 18px 0 0;
@@ -459,10 +444,6 @@
       min-height: 30px;
       padding: 6px 10px;
       font-size: 0.78rem;
-    }
-
-    .hero-support .qr-badge {
-      margin-left: auto;
     }
 
     .panel {
@@ -553,6 +534,15 @@
       animation: geminiFloat 5.5s ease-in-out infinite;
     }
 
+    .gemini-tools {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
     .gemini-mark {
       width: 24px;
       height: 24px;
@@ -561,35 +551,47 @@
       animation: geminiTwinkle 2.8s ease-in-out infinite;
     }
 
-    .qr-badge {
+    .qr-trigger {
       position: relative;
-      z-index: 2;
-      width: clamp(116px, 10vw, 144px);
-      flex: 0 0 clamp(116px, 10vw, 144px);
+      z-index: 4;
+      width: 52px;
+      min-height: 52px;
       display: grid;
-      gap: 8px;
-      padding: 10px;
-      border: 1px solid rgba(14, 165, 233, 0.2);
+      place-items: center;
+      gap: 2px;
+      padding: 5px;
+      border: 1px solid rgba(14, 165, 233, 0.26);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.13);
+      color: #174569;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.1);
       backdrop-filter: blur(12px);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
     }
 
-    .qr-badge img {
-      width: 100%;
-      aspect-ratio: 1;
+    .qr-trigger:hover,
+    .qr-trigger:focus-visible {
+      border-color: rgba(14, 165, 233, 0.72);
+      transform: translateY(-1px);
+      outline: none;
+      box-shadow: 0 16px 34px rgba(14, 165, 233, 0.16);
+    }
+
+    .qr-trigger img {
+      width: 31px;
+      height: 31px;
       display: block;
-      border-radius: 6px;
+      border-radius: 3px;
       object-fit: contain;
       background: #ffffff;
       image-rendering: pixelated;
     }
 
-    .qr-badge span {
+    .qr-trigger span {
       color: #174569;
-      font-size: 0.72rem;
-      line-height: 1.15;
+      font-size: 0.56rem;
+      line-height: 1;
       font-weight: 900;
       text-align: center;
     }
@@ -638,6 +640,112 @@
       object-fit: contain;
       filter: drop-shadow(0 22px 30px rgba(15, 23, 42, 0.18));
       animation: portraitFloat 5.6s ease-in-out infinite;
+    }
+
+    .portrait-nameplate {
+      position: relative;
+      z-index: 3;
+      width: min(92%, 340px);
+      justify-self: center;
+      padding: 10px 12px;
+      border: 1px solid rgba(200, 135, 25, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      color: #174569;
+      text-align: center;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .portrait-nameplate strong,
+    .portrait-nameplate span {
+      display: block;
+    }
+
+    .portrait-nameplate strong {
+      font-size: clamp(0.86rem, 1.25vw, 1rem);
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .portrait-nameplate span {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .qr-dialog {
+      width: min(440px, calc(100vw - 32px));
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .qr-dialog::backdrop {
+      background: rgba(15, 23, 42, 0.52);
+      backdrop-filter: blur(8px);
+    }
+
+    .qr-dialog-panel {
+      padding: clamp(18px, 4vw, 28px);
+      border: 1px solid rgba(93, 226, 255, 0.34);
+      border-radius: 12px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(236, 249, 255, 0.96));
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
+      text-align: center;
+    }
+
+    .qr-dialog-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .qr-dialog-title {
+      margin: 0;
+      color: #123b64;
+      font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .qr-close {
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid rgba(14, 165, 233, 0.24);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #174569;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .qr-dialog img {
+      width: min(300px, 74vw);
+      aspect-ratio: 1;
+      display: block;
+      margin: 0 auto;
+      border: 10px solid #ffffff;
+      border-radius: 8px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.14);
+    }
+
+    .qr-dialog-note {
+      max-width: 320px;
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45;
+      font-weight: 750;
     }
 
     .mini-map {
@@ -1188,13 +1296,24 @@
       }
 
       .signal-card.is-portrait .signal-content {
-        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) auto;
       }
 
       .gemini-badge {
         padding: 7px 9px;
         gap: 7px;
         font-size: 0.76rem;
+      }
+
+      .qr-trigger {
+        width: 46px;
+        min-height: 46px;
+        padding: 4px;
+      }
+
+      .qr-trigger img {
+        width: 27px;
+        height: 27px;
       }
 
       .gemini-mark {
@@ -1209,19 +1328,21 @@
         margin-top: 14px;
       }
 
-      .qr-badge {
-        width: 92px;
-        flex-basis: 92px;
-        gap: 5px;
-        padding: 7px;
-      }
-
-      .qr-badge span {
-        font-size: 0.58rem;
-      }
-
       .portrait-photo {
         width: min(58%, 190px);
+      }
+
+      .portrait-nameplate {
+        width: min(94%, 300px);
+        padding: 8px 10px;
+      }
+
+      .portrait-nameplate strong {
+        font-size: 0.82rem;
+      }
+
+      .portrait-nameplate span {
+        font-size: 0.64rem;
       }
 
       .portrait-stats {
@@ -1354,13 +1475,6 @@
         line-height: 1.05;
       }
 
-      .presenter-line {
-        margin-top: 12px;
-        padding: 8px 10px;
-        font-size: 0.78rem;
-        line-height: 1.35;
-      }
-
       .subtitle {
         margin-top: 12px;
         font-size: 0.92rem;
@@ -1405,7 +1519,7 @@
       }
 
       .signal-card.is-portrait {
-        height: clamp(168px, 28vh, 220px);
+        height: clamp(230px, 35vh, 290px);
       }
 
       .signal-content {
@@ -1413,14 +1527,19 @@
       }
 
       .portrait-photo {
-        width: min(46%, 150px);
+        width: min(50%, 158px);
       }
 
-      .qr-badge {
-        width: 82px;
-        flex-basis: 82px;
-        gap: 4px;
-        padding: 6px;
+      .portrait-nameplate {
+        padding: 7px 9px;
+      }
+
+      .qr-dialog-panel {
+        padding: 16px;
+      }
+
+      .qr-dialog img {
+        width: min(280px, 78vw);
       }
 
       .stat-row {
@@ -1517,7 +1636,6 @@
         <div class="hero-grid">
           <div>
             <h1 class="slide-title" id="slide-1-title">Custom Gemini V4 untuk Analisis Laporan Audit</h1>
-            <p class="presenter-line">Mohamad Nurakmal bin Ab Rasid | Analisis laporan audit</p>
             <p class="subtitle">Aliran kerja ringkas untuk universiti awam dan institusi di bawah Kementerian Pendidikan Tinggi, daripada dokumen pengauditan kepada output analisis yang seragam, boleh disemak dan sedia dimasukkan ke templat slaid.</p>
             <div class="hero-support">
               <div class="pill-row hero-topic-row" aria-label="Topik utama">
@@ -1526,30 +1644,36 @@
                 <span class="pill">Prompt Standard</span>
                 <span class="pill">Output Analisis</span>
               </div>
-              <div class="qr-badge" aria-label="QR untuk imbas bahan pembentangan">
-                <img src="assets/slide-gems-qr.png" alt="QR untuk imbas bahan pembentangan">
-                <span>Imbas QR</span>
-              </div>
             </div>
           </div>
           <div class="panel signal-card is-portrait" aria-label="Visual Mohamad Nurakmal dan Gemini">
             <div class="signal-content">
-              <div class="gemini-badge" aria-label="Gemini">
-                <svg class="gemini-mark" viewBox="0 0 24 24" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="geminiGradient" x1="3" y1="21" x2="21" y2="3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#2563eb"></stop>
-                      <stop offset="0.5" stop-color="#0ea5e9"></stop>
-                      <stop offset="1" stop-color="#c88719"></stop>
-                    </linearGradient>
-                  </defs>
-                  <path fill="url(#geminiGradient)" d="M12 2.2c1.55 4.85 4.1 7.4 9.2 9.8-5.1 2.4-7.65 4.95-9.2 9.8-1.55-4.85-4.1-7.4-9.2-9.8 5.1-2.4 7.65-4.95 9.2-9.8Z"></path>
-                </svg>
-                <span>Gemini</span>
+              <div class="gemini-tools">
+                <div class="gemini-badge" aria-label="Gemini">
+                  <svg class="gemini-mark" viewBox="0 0 24 24" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="geminiGradient" x1="3" y1="21" x2="21" y2="3" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#2563eb"></stop>
+                        <stop offset="0.5" stop-color="#0ea5e9"></stop>
+                        <stop offset="1" stop-color="#c88719"></stop>
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#geminiGradient)" d="M12 2.2c1.55 4.85 4.1 7.4 9.2 9.8-5.1 2.4-7.65 4.95-9.2 9.8-1.55-4.85-4.1-7.4-9.2-9.8 5.1-2.4 7.65-4.95 9.2-9.8Z"></path>
+                  </svg>
+                  <span>Gemini</span>
+                </div>
+                <button class="qr-trigger" type="button" data-open-qr aria-label="Buka QR besar untuk imbas" aria-haspopup="dialog" aria-controls="qrDialog">
+                  <img src="assets/slide-gems-qr.png" alt="">
+                  <span>QR</span>
+                </button>
               </div>
               <div class="portrait-stage">
                 <span class="portrait-orbit" aria-hidden="true"></span>
                 <img class="portrait-photo" src="assets/mohamad-nurakmal.png" alt="Mohamad Nurakmal bin Ab Rasid">
+              </div>
+              <div class="portrait-nameplate">
+                <strong>Mohamad Nurakmal bin Ab Rasid</strong>
+                <span>Analisis laporan audit</span>
               </div>
             </div>
           </div>
@@ -1774,6 +1898,10 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
                 <span class="portrait-orbit" aria-hidden="true"></span>
                 <img class="portrait-photo" src="assets/mohamad-nurakmal.png" alt="Mohamad Nurakmal bin Ab Rasid">
               </div>
+              <div class="portrait-nameplate">
+                <strong>Mohamad Nurakmal bin Ab Rasid</strong>
+                <span>Analisis laporan audit</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1788,6 +1916,17 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
     </footer>
   </div>
 
+  <dialog class="qr-dialog" id="qrDialog" aria-labelledby="qrDialogTitle">
+    <div class="qr-dialog-panel">
+      <div class="qr-dialog-top">
+        <h2 class="qr-dialog-title" id="qrDialogTitle">Imbas QR bahan pembentangan</h2>
+        <button class="qr-close" type="button" data-close-qr>Tutup</button>
+      </div>
+      <img src="assets/slide-gems-qr.png" alt="QR untuk imbas bahan pembentangan">
+      <p class="qr-dialog-note">Paparkan QR ini semasa sesi supaya peserta boleh imbas dengan jelas dari tempat duduk.</p>
+    </div>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite">Disalin ke clipboard.</div>
 
   <script>
@@ -1799,6 +1938,8 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
     const nextBtn = document.getElementById("nextBtn");
     const fullscreenBtn = document.getElementById("fullscreenBtn");
     const toast = document.getElementById("toast");
+    const qrDialog = document.getElementById("qrDialog");
+    const qrCloseBtn = document.querySelector("[data-close-qr]");
     let current = 0;
     let toastTimer;
 
@@ -1910,6 +2051,24 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       }, 1800);
     }
 
+    function openQrDialog() {
+      if (!qrDialog) return;
+      if (typeof qrDialog.showModal === "function") {
+        qrDialog.showModal();
+        return;
+      }
+      qrDialog.setAttribute("open", "");
+    }
+
+    function closeQrDialog() {
+      if (!qrDialog) return;
+      if (typeof qrDialog.close === "function") {
+        qrDialog.close();
+        return;
+      }
+      qrDialog.removeAttribute("open");
+    }
+
     function getFullscreenElement() {
       return document.fullscreenElement || document.webkitFullscreenElement || null;
     }
@@ -1989,6 +2148,16 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       button.addEventListener("click", () => {
         copyTextFrom(button.dataset.copyTarget);
       });
+    });
+
+    document.querySelectorAll("[data-open-qr]").forEach((button) => {
+      button.addEventListener("click", openQrDialog);
+    });
+
+    qrCloseBtn?.addEventListener("click", closeQrDialog);
+
+    qrDialog?.addEventListener("click", (event) => {
+      if (event.target === qrDialog) closeQrDialog();
     });
 
     window.addEventListener("hashchange", () => {
