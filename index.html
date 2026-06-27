@@ -380,11 +380,6 @@
       font-size: 0.66em;
     }
 
-    #slide-2-title {
-      font-size: clamp(1.75rem, 3.45vw, 3.35rem);
-      line-height: 1.04;
-    }
-
     .slide-title.one-line-title {
       max-width: 100%;
       font-size: clamp(2rem, 2.7vw, 3rem);
@@ -1298,8 +1293,8 @@
     .toast {
       position: fixed;
       right: clamp(18px, 4vw, 52px);
-      top: calc(var(--topbar-h) + 14px);
-      z-index: 30;
+      top: calc(var(--topbar-h) + 8px);
+      z-index: 80;
       max-width: min(340px, calc(100vw - 36px));
       padding: 12px 14px;
       border: 1px solid rgba(130, 242, 189, 0.42);
@@ -1568,11 +1563,6 @@
         line-height: 1.02;
       }
 
-      #slide-2-title {
-        font-size: clamp(1.38rem, 7.1vw, 2rem);
-        line-height: 1.05;
-      }
-
       .slide-title.one-line-title {
         font-size: clamp(1.42rem, 5.7vw, 2rem);
         line-height: 1.08;
@@ -1832,7 +1822,7 @@
       <section class="slide" data-slide="2" aria-labelledby="slide-2-title">
         <div class="content-card panel pad">
           <p class="eyeline">Agenda Pembentangan</p>
-          <h2 class="slide-title small" id="slide-2-title">Perkara yang akan dibincangkan</h2>
+          <h2 class="slide-title small one-line-title" id="slide-2-title">Perkara yang akan dibincangkan</h2>
           <p class="subtitle">Sesi ini memberi tumpuan kepada penggunaan Custom Gemini secara tersusun supaya para peserta dapat menghasilkan output analisis yang seragam, mudah disemak dan sesuai dipindahkan ke templat slaid.</p>
           <ul class="list">
             <li>Mengakses Custom Gemini yang telah disediakan.</li>
