@@ -566,10 +566,27 @@
     .gemini-tools {
       position: relative;
       z-index: 4;
+      justify-self: center;
+      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 10px;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .gemini-tools .gemini-badge,
+    .gemini-tools .qr-trigger {
+      min-height: 58px;
+      border-color: rgba(14, 165, 233, 0.24);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+      backdrop-filter: blur(12px);
+    }
+
+    .gemini-tools .gemini-badge {
+      min-width: 138px;
+      justify-content: center;
+      padding: 10px 16px;
     }
 
     .gemini-mark {
@@ -583,12 +600,12 @@
     .qr-trigger {
       position: relative;
       z-index: 4;
-      width: 52px;
-      min-height: 52px;
+      width: 66px;
+      min-height: 58px;
       display: grid;
       place-items: center;
       gap: 2px;
-      padding: 5px;
+      padding: 7px 8px;
       border: 1px solid rgba(14, 165, 233, 0.26);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.94);
@@ -608,8 +625,8 @@
     }
 
     .qr-trigger img {
-      width: 31px;
-      height: 31px;
+      width: 30px;
+      height: 30px;
       display: block;
       border-radius: 3px;
       object-fit: contain;
@@ -619,7 +636,7 @@
 
     .qr-trigger span {
       color: #174569;
-      font-size: 0.56rem;
+      font-size: 0.6rem;
       line-height: 1;
       font-weight: 900;
       text-align: center;
@@ -1357,10 +1374,20 @@
         font-size: 0.76rem;
       }
 
+      .gemini-tools .gemini-badge {
+        min-width: 136px;
+        min-height: 56px;
+      }
+
       .qr-trigger {
         width: 46px;
         min-height: 46px;
         padding: 4px;
+      }
+
+      .gemini-tools .qr-trigger {
+        width: 58px;
+        min-height: 56px;
       }
 
       .qr-trigger img {
