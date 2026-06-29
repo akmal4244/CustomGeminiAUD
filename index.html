@@ -951,6 +951,29 @@
       scrollbar-width: thin;
     }
 
+    .content-card.template-slide {
+      overflow: hidden;
+    }
+
+    .template-slide .list {
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .template-slide .list li {
+      font-size: clamp(0.94rem, 1.3vw, 1.04rem);
+      line-height: 1.38;
+    }
+
+    .template-slide .actions {
+      margin-top: 18px;
+    }
+
+    .template-slide .callout {
+      margin-top: 18px;
+      padding: 14px 18px;
+    }
+
     .content-card.prompt-slide {
       width: min(980px, 100%);
       height: 100%;
@@ -1879,6 +1902,10 @@
         overflow: visible;
       }
 
+      .content-card.template-slide {
+        overflow: visible;
+      }
+
       .prompt-slide .prompt-box {
         overflow: visible;
       }
@@ -2215,17 +2242,23 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
       </section>
 
       <section class="slide" data-slide="9" aria-labelledby="slide-9-title">
-        <div class="content-card panel pad">
+        <div class="content-card panel pad template-slide">
           <p class="eyeline">Templat Slaid Seragam</p>
           <h2 class="slide-title small one-line-title" id="slide-9-title">Masukkan output ke templat slaid</h2>
           <p class="subtitle">Pindahkan output yang telah disemak ke templat slaid supaya semua pembentangan auditor nampak seragam.</p>
           <ul class="list">
             <li>Tajuk Analisis dimasukkan ke slide pembuka tajuk.</li>
             <li>Ringkasan Eksekutif dijadikan slide ringkasan utama.</li>
-            <li>Bahagian 3 dimasukkan ke slide register penemuan utama.</li>
+            <li>Bahagian 4 dimasukkan ke slide isu berulang.</li>
             <li>Bahagian 5 dimasukkan ke slide kategori dan tahap risiko.</li>
             <li>Bahagian 6 dimasukkan ke slide rumusan dan fokus pengurusan.</li>
           </ul>
+          <div class="actions" aria-label="Download template slaid">
+            <a class="btn primary" href="https://docs.google.com/presentation/d/1qAY56GkkvYxQsKS5fhZaSlzfs1uqvOBn/edit?usp=sharing&amp;ouid=105726279532383248637&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+              Download Template
+            </a>
+          </div>
           <div class="callout">Tujuan templat: semua auditor bawa output dalam format yang sama, mudah disemak dan mudah dibandingkan.</div>
         </div>
       </section>
