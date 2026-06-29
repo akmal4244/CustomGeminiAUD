@@ -1118,6 +1118,45 @@
       margin-top: 24px;
     }
 
+    .model-requirement {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 560px;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(247, 200, 115, 0.42);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 247, 232, 0.96), rgba(255, 255, 255, 0.92));
+      color: #7a4a00;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+    }
+
+    .model-requirement strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-height: 26px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #d18a00;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .model-requirement span {
+      color: #5d3a00;
+      font-size: clamp(0.92rem, 1.2vw, 1rem);
+      font-weight: 760;
+      line-height: 1.45;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -1813,6 +1852,18 @@
         flex-wrap: wrap;
       }
 
+      .model-requirement {
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 14px;
+        padding: 12px 13px;
+      }
+
+      .model-requirement span {
+        font-size: 0.86rem;
+        line-height: 1.4;
+      }
+
       pre {
         max-height: none;
         padding: 14px;
@@ -1854,6 +1905,10 @@
         height: 21px;
         flex-basis: 21px;
         font-size: 0.6rem;
+      }
+
+      .model-requirement {
+        flex-direction: column;
       }
 
       .portrait-footer .gemini-tools {
@@ -2014,6 +2069,10 @@
             <p class="eyeline">Akses Custom Gemini</p>
             <h2 class="slide-title small one-line-title" id="slide-3-title">Buka Custom Gemini</h2>
             <p class="subtitle">Minta semua peserta membuka pautan ini dahulu. Gunakan butang terus ke Gemini atau salin pautan jika mahu buka di tab lain.</p>
+            <div class="model-requirement" role="note" aria-label="Keperluan model Gemini Pro">
+              <strong>Wajib</strong>
+              <span>Peserta perlu menggunakan model Gemini Pro sebelum memulakan analisis.</span>
+            </div>
             <div class="actions">
               <a class="btn primary" href="https://gemini.google.com/gem/13soyVBmExhzZiL88kbKawhKt1rzceJrF?usp=sharing" target="_blank" rel="noopener">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
