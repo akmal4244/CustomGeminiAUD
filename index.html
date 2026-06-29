@@ -1059,6 +1059,7 @@
     }
 
     .prompt-box {
+      min-width: 0;
       margin-top: 22px;
       overflow: hidden;
       border: 1px solid rgba(93, 226, 255, 0.24);
@@ -1080,6 +1081,10 @@
       font-weight: 800;
     }
 
+    .prompt-top span {
+      min-width: 0;
+    }
+
     pre {
       max-height: min(36svh, 340px);
       margin: 0;
@@ -1090,6 +1095,8 @@
       font-size: clamp(0.82rem, 1.18vw, 0.96rem);
       line-height: 1.6;
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
       background:
         linear-gradient(90deg, rgba(14, 165, 233, 0.05), transparent 18%),
         #fbfdff;
@@ -1895,6 +1902,12 @@
         overflow: visible;
       }
 
+      #image-prompt {
+        max-height: min(45svh, 380px);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
       .content-card,
       .content-card.prompt-slide {
         height: auto;
@@ -2279,41 +2292,287 @@ Pastikan setiap cadangan fokus pengurusan merujuk kepada ID Penemuan yang sama.<
               <span>Prompt rangka JSON untuk Gemini Image</span>
               <button class="btn" type="button" data-copy-target="image-prompt">Salin Prompt JSON</button>
             </div>
-            <pre id="image-prompt">Sila tukarkan rumusan analisis audit di bawah kepada rangka visual dalam format JSON text sahaja untuk digunakan dalam chat baharu Gemini Image.
-
-Arahan output:
-- Berikan JSON sah sahaja, tanpa markdown dan tanpa penerangan tambahan.
-- Gunakan Bahasa Melayu Malaysia yang ringkas dan profesional.
-- Fokus kepada mesej pengurusan, risiko Kritikal / Tinggi, impak dan tindakan fokus pengurusan.
-- Jangan masukkan maklumat sensitif, nama individu atau butiran yang tidak perlu dipaparkan dalam visual.
-- Pastikan visual sesuai sebagai latar slide 16:9 untuk pembentangan audit.
-
-Struktur JSON wajib:
+            <pre id="image-prompt">```json
 {
-  "tajuk_visual": "",
-  "mesej_utama": "",
-  "ringkasan_pengurusan": "",
-  "risiko_utama": [
-    {
-      "id_penemuan": "",
-      "isu": "",
-      "tahap_risiko": "",
-      "impak": "",
-      "tindakan_fokus": ""
-    }
-  ],
-  "gaya_visual": {
-    "format": "latar slide 16:9",
-    "mood": "profesional, bersih, eksekutif dan mudah dibaca",
-    "warna": ["biru muda", "putih", "emas lembut"],
-    "elemen_visual": [],
-    "elakkan": ["teks terlalu banyak", "maklumat sensitif", "logo tidak dibenarkan"]
+  &quot;arahan_paling_utama&quot;: &quot;JANA IMEJ SEKARANG. Output mestilah satu imej dashboard infografik sahaja. Jangan hasilkan analisis teks, jangan balas semula JSON, dan jangan beri penerangan bertulis.&quot;,
+  &quot;jenis_output&quot;: &quot;image_dashboard_rumusan_prestasi_risiko_jabatan&quot;,
+  &quot;versi_template&quot;: &quot;5.2_dynamic_clean_image_risk4x4&quot;,
+  &quot;bahasa&quot;: {
+    &quot;locale&quot;: &quot;ms-MY&quot;,
+    &quot;gaya_bahasa&quot;: &quot;Bahasa Melayu profesional, Kuala Lumpur, Malaysia&quot;,
+    &quot;arahan_bahasa&quot;: [
+      &quot;Semua label dalam imej mesti menggunakan Bahasa Melayu Malaysia.&quot;,
+      &quot;Jangan guna label Bahasa Inggeris.&quot;,
+      &quot;Jangan cipta ejaan pelik, singkatan tidak rasmi atau terjemahan yang tidak wujud.&quot;,
+      &quot;Gunakan istilah audit yang kemas, rasmi dan mudah difahami.&quot;
+    ]
   },
-  "prompt_gemini_image": ""
+  &quot;sumber_data_wajib&quot;: {
+    &quot;input_utama&quot;: &quot;{{OUTPUT_ANALISIS_CUSTOM_GEMINI_ATAU_DOKUMEN_ANALISIS_DILAMPIRKAN}}&quot;,
+    &quot;arahan&quot;: [
+      &quot;Baca dan fahami keseluruhan output analisis atau dokumen analisis yang dilampirkan.&quot;,
+      &quot;Gunakan hanya maklumat yang benar-benar wujud dalam analisis.&quot;,
+      &quot;Jangan cipta jabatan, PTj, tajuk audit, skor, tahap risiko, jumlah penemuan atau rumusan baharu.&quot;,
+      &quot;Jika markah rasmi tidak dinyatakan, paparkan sebagai &#39;Tiada Markah Rasmi&#39; atau &#39;Analisis Deskriptif&#39;.&quot;,
+      &quot;Jika skor risiko unit tidak jelas, paparkan Risiko Dominan sahaja dan jangan reka skor purata.&quot;,
+      &quot;Bersihkan semua rujukan sumber, nota kaki, nombor rujukan, nombor baris dan tanda petikan sumber sebelum teks dipaparkan dalam imej.&quot;
+    ]
+  },
+  &quot;output_media&quot;: {
+    &quot;jenis&quot;: &quot;single_image_only&quot;,
+    &quot;bukan&quot;: [
+      &quot;slide deck&quot;,
+      &quot;PowerPoint&quot;,
+      &quot;presentation&quot;,
+      &quot;editor UI&quot;,
+      &quot;analisis teks&quot;,
+      &quot;JSON balasan&quot;
+    ],
+    &quot;nisbah&quot;: &quot;16:9&quot;,
+    &quot;orientasi&quot;: &quot;landscape&quot;,
+    &quot;kualiti&quot;: &quot;high resolution, sharp, clean, readable&quot;,
+    &quot;gaya&quot;: &quot;dashboard audit korporat, moden, profesional, eksekutif, premium&quot;
+  },
+  &quot;tajuk_imej&quot;: {
+    &quot;tajuk_utama&quot;: &quot;RUMUSAN&quot;,
+    &quot;subtajuk&quot;: &quot;PRESTASI &amp; RISIKO JABATAN&quot;,
+    &quot;nama_institusi&quot;: &quot;{{AUTO_EXTRACT_NAMA_INSTITUSI}}&quot;,
+    &quot;tahun_atau_tempoh&quot;: &quot;{{AUTO_EXTRACT_TAHUN_ATAU_TEMPOH_ANALISIS}}&quot;
+  },
+  &quot;reka_bentuk_rujukan&quot;: {
+    &quot;gaya_yang_dikehendaki&quot;: &quot;Ikut look dashboard contoh: tajuk besar di atas, kad utama dinamik di bahagian atas, taburan kategori isu dalam kad berlajur di bawah kiri, gauge risiko keseluruhan di bawah tengah dan rumusan eksekutif di bawah kanan.&quot;,
+    &quot;latar&quot;: &quot;putih bersih dengan tona lembut&quot;,
+    &quot;warna_utama&quot;: &quot;biru navy korporat&quot;,
+    &quot;kad&quot;: &quot;kad putih membulat dengan bayang lembut, garisan nipis dan gradient lembut&quot;,
+    &quot;ikon&quot;: &quot;ikon vektor besar, moden, kemas dan profesional&quot;,
+    &quot;tipografi&quot;: {
+      &quot;tajuk&quot;: &quot;besar, tebal, huruf besar&quot;,
+      &quot;subtajuk&quot;: &quot;jelas, kemas dan profesional&quot;,
+      &quot;nombor&quot;: &quot;besar, tebal dan mudah dibaca&quot;,
+      &quot;isi&quot;: &quot;ringkas, padat dan tidak terlalu kecil&quot;
+    }
+  },
+  &quot;label_wajib_bahasa_melayu&quot;: {
+    &quot;prestasi&quot;: &quot;Prestasi&quot;,
+    &quot;tahap_risiko&quot;: &quot;Tahap Risiko&quot;,
+    &quot;penemuan_utama&quot;: &quot;Penemuan Utama&quot;,
+    &quot;isu_berulang&quot;: &quot;Isu Berulang&quot;,
+    &quot;risiko_dominan&quot;: &quot;Risiko Dominan&quot;,
+    &quot;skor_risiko&quot;: &quot;Skor Risiko&quot;,
+    &quot;rumusan_ringkas&quot;: &quot;Rumusan Ringkas&quot;,
+    &quot;rumusan_eksekutif&quot;: &quot;Rumusan Eksekutif&quot;,
+    &quot;tahap_risiko_keseluruhan&quot;: &quot;Tahap Risiko Keseluruhan&quot;
+  },
+  &quot;logik_dynamic&quot;: {
+    &quot;unit_kad_utama&quot;: &quot;AUTO_DETECT&quot;,
+    &quot;keutamaan_unit_kad&quot;: [
+      &quot;Gunakan jabatan atau PTj jika laporan menyenaraikan jabatan atau PTj.&quot;,
+      &quot;Jika laporan tidak mempunyai jabatan atau PTj yang jelas, gunakan tajuk pengauditan sebagai kad utama.&quot;,
+      &quot;Jika laporan gabungan, gunakan entiti, PTj atau tajuk audit yang paling sesuai berdasarkan struktur analisis.&quot;
+    ],
+    &quot;bilangan_kad&quot;: &quot;AUTO_COUNT berdasarkan jumlah unit sebenar dalam laporan. Jangan tetapkan kepada empat secara tetap.&quot;,
+    &quot;susun_atur_kad&quot;: {
+      &quot;1_3_kad&quot;: &quot;Paparkan kad besar dalam satu baris seperti contoh.&quot;,
+      &quot;4_kad&quot;: &quot;Paparkan empat kad dalam satu baris.&quot;,
+      &quot;5_8_kad&quot;: &quot;Paparkan dalam grid dua baris yang kemas.&quot;,
+      &quot;lebih_8_kad&quot;: &quot;Paparkan kad paling material berdasarkan risiko tertinggi dan ringkaskan selebihnya jika ruang tidak mencukupi.&quot;
+    }
+  },
+  &quot;kad_dinamik&quot;: {
+    &quot;sumber&quot;: &quot;AUTO_EXTRACT daripada senarai jabatan, PTj atau tajuk pengauditan dalam laporan.&quot;,
+    &quot;ulang_untuk_setiap_unit&quot;: {
+      &quot;nama_unit&quot;: &quot;{{AUTO_EXTRACT_NAMA_JABATAN_PTJ_ATAU_TAJUK_AUDIT}}&quot;,
+      &quot;singkatan&quot;: &quot;{{AUTO_EXTRACT_SINGKATAN_JIKA_ADA}}&quot;,
+      &quot;entiti&quot;: &quot;{{AUTO_EXTRACT_ENTITI_JIKA_ADA}}&quot;,
+      &quot;ikon&quot;: &quot;{{AUTO_SELECT_ICON_BERDASARKAN_FUNGSI_UNIT}}&quot;,
+      &quot;warna_tema&quot;: &quot;{{AUTO_SELECT_WARNA_SESUAI_UNTUK_REKA_BENTUK_SAHAJA}}&quot;,
+      &quot;prestasi_atau_penarafan&quot;: &quot;{{AUTO_EXTRACT_PRESTASI_MARKAH_ATAU_PENARAFAN}}&quot;,
+      &quot;jumlah_penemuan&quot;: &quot;{{AUTO_EXTRACT_JUMLAH_PENEMUAN_UNIT}}&quot;,
+      &quot;isu_berulang&quot;: &quot;{{AUTO_EXTRACT_JUMLAH_ISU_BERULANG_JIKA_ADA}}&quot;,
+      &quot;risiko_dominan&quot;: &quot;{{AUTO_EXTRACT_RISIKO_DOMINAN_UNIT}}&quot;,
+      &quot;skor_risiko&quot;: &quot;{{AUTO_EXTRACT_SKOR_RISIKO_JIKA_RASMI_ATAU_JELAS}}&quot;,
+      &quot;tahap_risiko&quot;: &quot;{{AUTO_EXTRACT_TAHAP_RISIKO_UNIT}}&quot;,
+      &quot;rumusan_ringkas&quot;: &quot;{{AUTO_SUMMARISE_1_ATAU_2_AYAT_BERDASARKAN_DAPATAN_UNIT}}&quot;
+    },
+    &quot;arahan_paparan&quot;: [
+      &quot;Jangan paparkan teks tema warna dalam kad.&quot;,
+      &quot;Warna tema hanya digunakan sebagai panduan reka bentuk.&quot;,
+      &quot;Jangan papar skor risiko jika skor tersebut tidak jelas atau tidak rasmi.&quot;,
+      &quot;Jangan letak nombor besar tanpa label yang jelas.&quot;,
+      &quot;Setiap kad perlu kemas, seimbang dan mudah dibaca.&quot;
+    ]
+  },
+  &quot;peraturan_risiko_4x4&quot;: {
+    &quot;formula&quot;: &quot;Risiko = Kemungkinan x Impak&quot;,
+    &quot;skala_kemungkinan&quot;: &quot;1 hingga 4&quot;,
+    &quot;skala_impak&quot;: &quot;1 hingga 4&quot;,
+    &quot;skor_minimum&quot;: 1,
+    &quot;skor_maksimum&quot;: 16,
+    &quot;pemetaan_tahap_risiko&quot;: {
+      &quot;RENDAH&quot;: &quot;1 hingga 3&quot;,
+      &quot;SEDERHANA&quot;: &quot;4 hingga 8&quot;,
+      &quot;TINGGI&quot;: &quot;9 hingga 12&quot;,
+      &quot;KRITIKAL&quot;: &quot;13 hingga 16&quot;
+    },
+    &quot;warna_risiko&quot;: {
+      &quot;RENDAH&quot;: &quot;hijau&quot;,
+      &quot;SEDERHANA&quot;: &quot;coklat keemasan&quot;,
+      &quot;TINGGI&quot;: &quot;jingga&quot;,
+      &quot;KRITIKAL&quot;: &quot;merah&quot;
+    },
+    &quot;arahan&quot;: [
+      &quot;Gunakan tahap risiko Rendah, Sederhana, Tinggi dan Kritikal.&quot;,
+      &quot;Jika skor risiko diberi tanpa tahap, petakan kepada tahap risiko berdasarkan skala 4x4.&quot;,
+      &quot;Jika tahap risiko telah dinyatakan dalam laporan, ikut tahap risiko laporan.&quot;,
+      &quot;Untuk taburan penemuan audit utama, pecahkan mengikut kategori isu dan tahap risiko 4x4.&quot;
+    ]
+  },
+  &quot;taburan_kategori_isu&quot;: {
+    &quot;tajuk&quot;: &quot;TABURAN PENEMUAN AUDIT MENGIKUT KATEGORI ISU&quot;,
+    &quot;mod&quot;: &quot;dynamic&quot;,
+    &quot;gaya_paparan_wajib&quot;: &quot;Kad kategori berlajur dengan ikon besar, jumlah penemuan dan label risiko berwarna seperti contoh rujukan. Jangan gunakan bar chart.&quot;,
+    &quot;larangan_visual&quot;: [
+      &quot;Jangan guna bar chart.&quot;,
+      &quot;Jangan guna stacked bar chart.&quot;,
+      &quot;Jangan guna horizontal bar chart.&quot;,
+      &quot;Jangan guna carta batang.&quot;
+    ],
+    &quot;layout_wajib&quot;: {
+      &quot;jenis&quot;: &quot;category_card_columns&quot;,
+      &quot;kepala_panel&quot;: &quot;bar biru navy dengan tajuk putih&quot;,
+      &quot;susunan&quot;: &quot;kategori disusun dari kiri ke kanan dalam lajur berasingan&quot;,
+      &quot;setiap_lajur_mesti_ada&quot;: [
+        &quot;kod kategori jika digunakan&quot;,
+        &quot;nama kategori&quot;,
+        &quot;ikon besar kategori&quot;,
+        &quot;jumlah penemuan besar&quot;,
+        &quot;perkataan PENEMUAN&quot;,
+        &quot;pecahan risiko dalam bentuk label berwarna secara menegak&quot;
+      ],
+      &quot;footer&quot;: &quot;bar biru navy di bahagian bawah dengan jumlah keseluruhan penemuan jika data tersedia&quot;
+    },
+    &quot;kategori_standard_jika_digunakan&quot;: [
+      &quot;K1 TIADA MANDAT&quot;,
+      &quot;K2 KESILAPAN ISU TEKNIKAL&quot;,
+      &quot;K3 KECUAIAN&quot;,
+      &quot;K4 PEMBAZIRAN&quot;,
+      &quot;K5 PENYELEWENGAN / KETIRISAN&quot;
+    ],
+    &quot;arahan&quot;: [
+      &quot;Kira jumlah penemuan bagi setiap kategori berdasarkan output analisis.&quot;,
+      &quot;Jika laporan menggunakan kategori lain, ikut kategori sebenar dalam laporan.&quot;,
+      &quot;Paparkan jumlah penemuan bagi setiap kategori.&quot;,
+      &quot;Paparkan pecahan risiko Rendah, Sederhana, Tinggi dan Kritikal bagi setiap kategori jika tersedia.&quot;,
+      &quot;Jika nilai sesuatu tahap risiko ialah kosong atau sifar, jangan paparkan label tersebut supaya kad tidak semak.&quot;,
+      &quot;Susun label risiko secara menegak dengan nombor di kiri dan tahap risiko di kanan.&quot;
+    ],
+    &quot;ulang_untuk_setiap_kategori&quot;: {
+      &quot;kod_kategori&quot;: &quot;{{AUTO_EXTRACT_KOD_KATEGORI_JIKA_ADA}}&quot;,
+      &quot;nama_kategori&quot;: &quot;{{AUTO_EXTRACT_KATEGORI}}&quot;,
+      &quot;ikon&quot;: &quot;{{AUTO_SELECT_ICON_KATEGORI}}&quot;,
+      &quot;jumlah_penemuan&quot;: &quot;{{AUTO_COUNT_PENEMUAN_KATEGORI}}&quot;,
+      &quot;pecahan_risiko&quot;: {
+        &quot;kritikal&quot;: &quot;{{AUTO_COUNT_KRITIKAL}}&quot;,
+        &quot;tinggi&quot;: &quot;{{AUTO_COUNT_TINGGI}}&quot;,
+        &quot;sederhana&quot;: &quot;{{AUTO_COUNT_SEDERHANA}}&quot;,
+        &quot;rendah&quot;: &quot;{{AUTO_COUNT_RENDAH}}&quot;
+      }
+    },
+    &quot;jumlah_keseluruhan&quot;: {
+      &quot;jumlah_penemuan&quot;: &quot;{{AUTO_COUNT_JUMLAH_PENEMUAN}}&quot;,
+      &quot;jumlah_isu_audit&quot;: &quot;{{AUTO_EXTRACT_JUMLAH_ISU_AUDIT_IF_AVAILABLE}}&quot;,
+      &quot;teks_footer&quot;: &quot;JUMLAH KESELURUHAN PENEMUAN: {{AUTO_COUNT_JUMLAH_PENEMUAN}} / {{AUTO_EXTRACT_JUMLAH_ISU_AUDIT_IF_AVAILABLE}} ISU AUDIT&quot;
+    }
+  },
+  &quot;risiko_keseluruhan&quot;: {
+    &quot;tajuk&quot;: &quot;TAHAP RISIKO KESELURUHAN&quot;,
+    &quot;tahap&quot;: &quot;{{AUTO_EXTRACT_TAHAP_RISIKO_KESELURUHAN}}&quot;,
+    &quot;skor&quot;: &quot;{{AUTO_EXTRACT_SKOR_JIKA_ADA}}&quot;,
+    &quot;visual&quot;: {
+      &quot;jenis&quot;: &quot;gauge_meter&quot;,
+      &quot;warna&quot;: &quot;berperingkat mengikut Rendah, Sederhana, Tinggi dan Kritikal&quot;,
+      &quot;kedudukan_jarum&quot;: &quot;{{AUTO_SET_BERDASARKAN_TAHAP_RISIKO_KESELURUHAN}}&quot;
+    },
+    &quot;arahan_paparan&quot;: [
+      &quot;Jangan tulis nama warna pada gauge.&quot;,
+      &quot;Jangan letak label warna pada segmen gauge.&quot;,
+      &quot;Paparkan hanya tajuk &#39;TAHAP RISIKO KESELURUHAN&#39; dan tahap risiko utama seperti RENDAH, SEDERHANA, TINGGI atau KRITIKAL.&quot;
+    ]
+  },
+  &quot;rumusan_eksekutif&quot;: {
+    &quot;tajuk&quot;: &quot;RUMUSAN EKSEKUTIF&quot;,
+    &quot;panjang&quot;: &quot;70 hingga 110 patah perkataan&quot;,
+    &quot;arahan&quot;: [
+      &quot;Hasilkan rumusan pendek berdasarkan output analisis.&quot;,
+      &quot;Nyatakan tahap risiko keseluruhan.&quot;,
+      &quot;Nyatakan unit atau tajuk audit paling berisiko.&quot;,
+      &quot;Nyatakan kategori isu dominan.&quot;,
+      &quot;Nyatakan fokus tindakan pengurusan.&quot;,
+      &quot;Pastikan rumusan bersih, padat dan sesuai dimasukkan dalam imej.&quot;
+    ],
+    &quot;teks&quot;: &quot;{{AUTO_GENERATE_RUMUSAN_BERDASARKAN_OUTPUT_ANALISIS}}&quot;
+  },
+  &quot;gaya_visual&quot;: {
+    &quot;latar&quot;: &quot;putih bersih dengan tona lembut&quot;,
+    &quot;warna_utama&quot;: &quot;biru navy korporat atau warna korporat institusi&quot;,
+    &quot;kad&quot;: &quot;kad putih membulat dengan bayang lembut dan garisan nipis&quot;,
+    &quot;ikon&quot;: &quot;ikon vektor besar, moden dan profesional&quot;,
+    &quot;grafik&quot;: [
+      &quot;carta donut prestasi jika sesuai&quot;,
+      &quot;badge tahap risiko berwarna&quot;,
+      &quot;blok statistik jumlah penemuan&quot;,
+      &quot;gauge meter risiko keseluruhan&quot;,
+      &quot;kad kategori berlajur untuk taburan penemuan audit&quot;
+    ],
+    &quot;tipografi&quot;: {
+      &quot;tajuk&quot;: &quot;besar, tebal, huruf besar&quot;,
+      &quot;subtajuk&quot;: &quot;tebal, jelas dan profesional&quot;,
+      &quot;nombor&quot;: &quot;besar, tebal dan mudah dibaca&quot;,
+      &quot;isi&quot;: &quot;ringkas, jelas dan tidak terlalu kecil&quot;
+    }
+  },
+  &quot;pembersihan_output_imej&quot;: {
+    &quot;wajib_buang&quot;: [
+      &quot;rujukan sumber&quot;,
+      &quot;nota kaki&quot;,
+      &quot;nombor rujukan&quot;,
+      &quot;nombor baris&quot;,
+      &quot;nombor petikan sumber&quot;,
+      &quot;tanda petikan sumber&quot;,
+      &quot;placeholder&quot;,
+      &quot;teks teknikal prompt&quot;,
+      &quot;teks konfigurasi&quot;,
+      &quot;teks tema warna&quot;,
+      &quot;label Bahasa Inggeris&quot;,
+      &quot;nama warna pada gauge&quot;
+    ],
+    &quot;arahan&quot;: [
+      &quot;Data boleh digunakan daripada laporan, tetapi semua rujukan sumber mesti dibersihkan sebelum dipaparkan.&quot;,
+      &quot;Jangan paparkan sebarang nombor rujukan atau nota sumber dalam mana-mana bahagian imej.&quot;,
+      &quot;Jangan paparkan teks tema warna; warna tema hanya digunakan sebagai panduan reka bentuk.&quot;,
+      &quot;Jangan paparkan placeholder atau arahan prompt dalam imej.&quot;,
+      &quot;Jangan paparkan label Bahasa Inggeris.&quot;,
+      &quot;Output akhir mesti kelihatan seperti dashboard rasmi yang bersih.&quot;
+    ]
+  },
+  &quot;larangan&quot;: [
+    &quot;Jangan balas semula JSON.&quot;,
+    &quot;Jangan hasilkan analisis teks.&quot;,
+    &quot;Jangan tetapkan bilangan kad kepada 4 secara tetap.&quot;,
+    &quot;Jangan reka data yang tiada dalam output analisis.&quot;,
+    &quot;Jangan masukkan terlalu banyak teks sehingga imej nampak semak.&quot;,
+    &quot;Jangan hasilkan paparan seperti slide PowerPoint.&quot;,
+    &quot;Jangan gunakan label risiko yang bercanggah dengan laporan.&quot;,
+    &quot;Jangan tukar maksud dapatan audit.&quot;,
+    &quot;Jangan paparkan rujukan sumber, nota kaki, nombor baris atau nombor petikan dalam imej.&quot;,
+    &quot;Jangan paparkan teks tema warna dalam imej.&quot;,
+    &quot;Jangan guna bar chart untuk bahagian taburan kategori isu.&quot;,
+    &quot;Jangan guna label Bahasa Inggeris.&quot;,
+    &quot;Jangan tulis nama warna pada gauge atau badge risiko.&quot;
+  ],
+  &quot;prompt_image_final&quot;: &quot;Jana imej dashboard infografik 16:9 sekarang. Jangan balas dalam bentuk teks, jangan balas semula JSON dan jangan hasilkan analisis bertulis. Imej mestilah dalam Bahasa Melayu profesional gaya Kuala Lumpur, Malaysia. Imej bertajuk RUMUSAN dengan subtajuk PRESTASI &amp; RISIKO JABATAN. Kandungan mesti dijana secara dinamik berdasarkan output analisis custom Gemini atau dokumen analisis yang diberikan. Bilangan kad utama mesti mengikut jumlah jabatan, PTj atau tajuk pengauditan sebenar dalam laporan, bukan tetap kepada empat. Setiap kad memaparkan nama unit atau tajuk audit, prestasi atau penarafan, jumlah penemuan, risiko dominan, tahap risiko dan rumusan ringkas. Gunakan pemarkahan risiko 4x4 dengan tahap Rendah, Sederhana, Tinggi dan Kritikal. Bahagian bawah kiri memaparkan taburan penemuan audit mengikut kategori isu dalam bentuk kad kategori berlajur dengan ikon besar, jumlah penemuan dan pecahan risiko Rendah, Sederhana, Tinggi dan Kritikal. Bahagian bawah tengah memaparkan gauge tahap risiko keseluruhan tanpa nama warna pada gauge. Bahagian bawah kanan memaparkan rumusan eksekutif pendek. Reka bentuk mesti bersih, moden, korporat, premium, jelas dibaca dan sesuai untuk laporan audit universiti. Jangan paparkan sebarang rujukan sumber, nota kaki, nombor rujukan, nombor baris, nombor petikan, placeholder, teks konfigurasi, teks tema warna, label Bahasa Inggeris atau nama warna pada gauge. Hasil akhir mestilah imej sahaja.&quot;
 }
-
-Bahan analisis:
-[Tampal Rumusan Bahagian 6, isu Kritikal / Tinggi dan cadangan fokus pengurusan di sini]</pre>
+```</pre>
           </div>
         </div>
       </section>
